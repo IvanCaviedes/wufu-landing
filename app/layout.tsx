@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   },
   keywords: [
     "Wufú",
+    "Wufu",
+    "Wufu mascotas",
+    "Wufu tienda para mascotas",
     "tienda para mascotas",
     "tienda de mascotas Colombia",
     "productos para perros",
