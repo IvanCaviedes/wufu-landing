@@ -1,50 +1,39 @@
 "use client";
-import { FormEvent, MouseEvent, useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { ArrowDown, ArrowRight, Bone, Cat, Check, Dog, Gift, Heart, Mail, PawPrint, ShieldCheck, Sparkles, ToyBrick, X } from "lucide-react";
-import heroImage from "../public/images/wufu-hero-v2.png";
-import bondImage from "../public/images/wufu-bond-v2.png";
-import Paw from "./ui/paw-mark";
-import Navbar from "./ui/navbar";
+
+import { FaqSection } from "./home/faq-section";
+import { HeroSection } from "./home/hero-section";
+import { BackToTop } from "./home/back-to-top";
+import { PillarsSection } from "./home/pillars-section";
+import { RevealSection } from "./home/reveal-section";
+import { SecretOverlays } from "./home/secret-overlays";
+import { SignupSection } from "./home/signup-section";
+import { useHomeExperience } from "./home/use-home-experience";
 import SiteFooter from "./ui/site-footer";
-import { publicConfig } from "./config/public";
 
-const faqs=[
- {q:"¿Qué está preparando Wufú?",a:"Una nueva forma de compartir, cuidar y disfrutar la vida con tu mascota. Todavía no podemos contarlo todo, pero nuestra manada será la primera en descubrirlo."},
- {q:"¿Cuándo será el lanzamiento?",a:"Muy pronto. La fecha exacta se revelará primero a quienes se registren. Déjanos tu correo para recibir la pista final antes que nadie."},
- {q:"¿Tiene algún costo registrarme?",a:"No. Unirte a la lista es gratis y te dará acceso anticipado a novedades, sorpresas y beneficios de lanzamiento."},
- {q:"¿Es para perros y gatos?",a:"Sí. Esto nace para celebrar todas las formas de familia: perros, gatos y cada historia que hace especial la vida juntos."},
-];
-type SecretId="clue"|"code"|"clock"|"paw"|"logo";
-const secretIds:SecretId[]=["clue","code","clock","paw","logo"];
-const progressKey="wufu.discoveries.v1";
-async function secretKey(){const bytes=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(`${publicConfig.brandName}-${publicConfig.campaignYear}-discoveries`));return crypto.subtle.importKey("raw",bytes,{name:"AES-GCM"},false,["encrypt","decrypt"])}
-async function saveProgress(found:SecretId[]){const iv=crypto.getRandomValues(new Uint8Array(12));const encrypted=await crypto.subtle.encrypt({name:"AES-GCM",iv},await secretKey(),new TextEncoder().encode(JSON.stringify(found)));const packed=new Uint8Array(iv.length+encrypted.byteLength);packed.set(iv);packed.set(new Uint8Array(encrypted),iv.length);localStorage.setItem(progressKey,btoa(String.fromCharCode(...packed)))}
-async function loadProgress(){try{const raw=localStorage.getItem(progressKey);if(!raw)return[];const packed=Uint8Array.from(atob(raw),c=>c.charCodeAt(0));const clear=await crypto.subtle.decrypt({name:"AES-GCM",iv:packed.slice(0,12)},await secretKey(),packed.slice(12));const value=JSON.parse(new TextDecoder().decode(clear));return Array.isArray(value)?value.filter((id):id is SecretId=>secretIds.includes(id)):[]}catch{return[]}}
-function Arrow({down=false}:{down?:boolean}){return down?<ArrowDown size={18}/>:<ArrowRight size={18}/>}
-function Countdown({onSecret}:{onSecret:()=>void}){const [t,setT]=useState({days:0,hours:0,minutes:0,seconds:0});useEffect(()=>{const configured=Date.parse(publicConfig.launchAt);const target=Number.isFinite(configured)?configured:Date.now();const tick=()=>{const d=Math.max(0,target-Date.now());setT({days:Math.floor(d/86400000),hours:Math.floor(d/3600000%24),minutes:Math.floor(d/60000%60),seconds:Math.floor(d/1000%60)})};tick();const id=setInterval(tick,1000);return()=>clearInterval(id)},[]);const names={days:"días",hours:"horas",minutes:"min",seconds:"seg"};return <div className="countdown">{Object.entries(t).map(([k,v])=><button type="button" className="time-unit" key={k} onDoubleClick={k==="seconds"?onSecret:undefined} aria-label={`${v} ${names[k as keyof typeof names]}`}><strong>{String(v).padStart(2,"0")}</strong><span>{names[k as keyof typeof names]}</span></button>)}</div>}
+export default function Home() {
+  const experience = useHomeExperience();
 
-export default function Home(){const [open,setOpen]=useState(0);const [sent,setSent]=useState(false);const [dark,setDark]=useState(false);const [progress,setProgress]=useState(0);const [secret,setSecret]=useState<SecretId|null>(null);const [found,setFound]=useState<SecretId[]>([]);const [prints,setPrints]=useState<{id:number,x:number,y:number,r:number}[]>([]);const typed=useRef("");useEffect(()=>{const saved=localStorage.getItem("wufu-theme");const next=saved?saved==="dark":matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.dataset.theme=next?"dark":"light";requestAnimationFrame(()=>setDark(next));void loadProgress().then(value=>setFound(value));const scroll=()=>setProgress(Math.min(100,scrollY/(document.documentElement.scrollHeight-innerHeight)*100));const add=(value:SecretId)=>{setSecret(value);setFound(v=>{const result=v.includes(value)?v:[...v,value];void saveProgress(result);return result})};const keys=(e:KeyboardEvent)=>{typed.current=(typed.current+e.key.toLowerCase()).slice(-4);if(typed.current===publicConfig.secretWord)add("code")};addEventListener("scroll",scroll,{passive:true});addEventListener("keydown",keys);return()=>{removeEventListener("scroll",scroll);removeEventListener("keydown",keys)}},[]);function discover(value:SecretId){setSecret(value);setFound(v=>{const result=v.includes(value)?v:[...v,value];void saveProgress(result);return result})}function theme(){const next=!dark;setDark(next);document.documentElement.dataset.theme=next?"dark":"light";localStorage.setItem("wufu-theme",next?"dark":"light")}function move(e:MouseEvent<HTMLElement>){e.currentTarget.style.setProperty("--mx",`${e.clientX}px`);e.currentTarget.style.setProperty("--my",`${e.clientY}px`)}function leavePrint(e:MouseEvent<HTMLElement>){if((e.target as HTMLElement).closest("input,select"))return;const id=Date.now();setPrints(p=>[...p.slice(-7),{id,x:e.clientX,y:e.clientY,r:Math.random()*40-20}]);setTimeout(()=>setPrints(p=>p.filter(v=>v.id!==id)),950)}function submit(e:FormEvent<HTMLFormElement>){e.preventDefault();setSent(true)}return <main onMouseMove={move} onClick={leavePrint}>
- {prints.map(p=><PawPrint className="click-print" key={p.id} style={{left:p.x,top:p.y,transform:`rotate(${p.r}deg)`}} aria-hidden="true"/>)}
- {secret&&<aside className={`secret-alert secret-${secret} ${found.length===5?"complete":""}`} role="alert" aria-live="polite"><div className="alert-icon"><Gift/></div><div className="alert-copy"><span><Sparkles/> Hallazgo {found.length}/5</span><h3>{found.length===5?"¡Colección completa!":secret==="code"?"Código encontrado":"Nuevo detalle encontrado"}</h3><p>{found.length===5?<>Algo especial te espera. <a href="#unete" onClick={()=>setSecret(null)}>Continuar →</a></>:secret==="code"?<>Código: <strong>{publicConfig.campaignCode}</strong></>:`Aún quedan ${5-found.length} por descubrir.`}</p></div><button className="secret-close" onClick={()=>setSecret(null)} aria-label="Cerrar alerta"><X/></button><div className="alert-timer"/></aside>}
- {found.length>0&&<button className={`reward-fab ${found.length===5?"complete":""}`} onClick={()=>setSecret(found.at(-1)??"clue")} aria-label={`Ver progreso de hallazgos: ${found.length} de 5`}><span><Gift/></span><b>{found.length===5?"Recompensa":"Hallazgos"}</b><i>{found.length}/5</i></button>}
- <div className="scroll-progress" style={{width:`${progress}%`}}/>
- <section className="hero" id="inicio">
-  <Navbar variant="landing" dark={dark} onToggleTheme={theme}/>
-  <div className="hero-grid wrap"><div className="hero-copy"><div className="eyebrow"><span className="pulse-dot"/> Algo grande está por llegar</div><h1>La vida juntos<br/>está a punto de<br/><em>cambiar.</em></h1><p>Muy pronto descubrirás una nueva forma de cuidar, consentir y compartir más momentos con quien siempre está a tu lado.</p><div className="hero-actions"><a href="#unete" className="button button-aqua">Ser parte de la manada <Arrow/></a><a href="#pistas" className="text-link">Seguir las pistas <Arrow down/></a></div><div className="discovery-whisper"><Sparkles/><span>Los mejores detalles no siempre están a simple vista.</span></div></div>
-  <div className="hero-visual" aria-label="Familia compartiendo con sus mascotas"><Image className="brand-photo" src={heroImage} alt="Persona compartiendo un momento feliz con su perro y su gato" fill priority sizes="(max-width: 900px) 100vw, 45vw"/><div className="orbit one"/><div className="orbit two"/><button className="mystery" onClick={()=>discover("clue")} aria-label="Descubrir una pista secreta">?</button><div className="sticker one" onDoubleClick={()=>discover("logo")}>Muy<br/>pronto</div><button className="sticker two" onDoubleClick={()=>discover("paw")} aria-label="Huella decorativa"><Paw light/></button><i className="spark a">✦</i><i className="spark b">✦</i></div></div>
-  <div className="marquee"><div>MÁS VIDAS JUNTAS　✦　MÁS MOMENTOS　✦　MÁS HISTORIAS　✦　MÁS VIDAS JUNTAS　✦　MÁS MOMENTOS　✦</div></div>
- </section>
- <section className="intro section wrap" id="pistas"><div className="kicker">01 — Sigue las pistas</div><div className="intro-grid"><h2>No es solo algo nuevo.<br/>Es algo muy <em>nuestro.</em></h2><p>Nace del amor que no necesita palabras, de las colas que se mueven al verte y de esos ronroneos que arreglan cualquier día.</p></div><div className="clue-grid">
-  <article className="clue dark"><span>01</span><i><Heart/></i><h3>Más cerca</h3><p>Porque lo mejor siempre empieza con un vínculo.</p><b><ArrowRight/></b></article>
-  <article className="clue aqua"><span>02</span><i><Sparkles/></i><h3>Más simple</h3><p>Pensado para hacer de cada día algo más fácil.</p><b><ArrowRight/></b></article>
-  <article className="clue mint"><span>03</span><i><PawPrint/></i><h3>Más feliz</h3><p>Bienestar para ellos. Tranquilidad para ti.</p><b><ArrowRight/></b></article>
- </div></section>
- <section className="reveal section"><div className="reveal-grid wrap"><div className="placeholder"><Image className="brand-photo" src={bondImage} alt="Persona abrazando con cariño a su perro" fill sizes="(max-width: 900px) 100vw, 42vw"/><div><Paw/></div></div><div className="reveal-copy"><div className="kicker light">02 — La espera vale la pena</div><h2>Lo bueno se<br/>disfruta.<br/><em>Lo increíble<br/>se espera.</em></h2><p>Estamos afinando cada detalle para sorprenderte. Mientras tanto, este reloj guarda el secreto.</p><Countdown onSecret={()=>discover("clock")}/><a href="#unete" className="button button-cream">Avísenme primero <Arrow/></a></div></div></section>
- <section className="faq section wrap" id="preguntas"><div className="faq-heading"><div><div className="kicker">03 — Sin pelos en la lengua</div><h2>Preguntas que<br/>mueven <em>la cola.</em></h2></div><div className="faq-badge"><Paw light/><span>Tenemos<br/>respuestas</span></div></div><div className="faq-list">{faqs.map((f,i)=><div className={`faq-item ${open===i?"open":""}`} key={f.q}><button onClick={()=>setOpen(open===i?-1:i)} aria-expanded={open===i}><span>{String(i+1).padStart(2,"0")}</span><strong>{f.q}</strong><i>{open===i?"−":"+"}</i></button><div className="faq-answer"><p>{f.a}</p></div></div>)}</div></section>
- <section className="signup section" id="unete"><div className="signup-inner wrap"><div className="signup-copy"><Paw light/><div className="kicker light">04 — Únete a la manada</div><h2>Sé el primero<br/>en saberlo.</h2><p>Recibe la gran noticia antes que nadie y desbloquea una sorpresa especial de lanzamiento.</p><div className="trust"><ShieldCheck/><span>Tus datos se usan únicamente para novedades del lanzamiento.</span></div><div className="pet-icons"><Dog/><Cat/><Bone/><ToyBrick/></div></div><div className="signup-card">{!sent?<form onSubmit={submit} autoComplete="on">
-  <input type="hidden" name="secretos_encontrados" value={`${found.length}/5`}/><input type="hidden" name="recompensa_desbloqueada" value={found.length===5?"sí":"no"}/>
-  <div className={`form-reward ${found.length===5?"unlocked":""}`}><Gift/><div><strong>{found.length===5?"Recompensa desbloqueada":"Algo especial te espera"}</strong><span>{found.length===5?"Tu registro quedará marcado como explorador experto.":`${found.length}/5 hallazgos encontrados`}</span></div><b>{found.length===5?"✓":`${found.length}/5`}</b></div>
-  <label htmlFor="name">Tu nombre</label><input id="name" name="name" maxLength={60} autoComplete="name" placeholder="¿Cómo te llamas?" required/><label htmlFor="email">Tu correo</label><div className="input-icon"><Mail/><input id="email" name="email" maxLength={120} autoComplete="email" type="email" placeholder="hola@ejemplo.com" required/></div><label htmlFor="pet">¿Quién es tu compañero?</label><select id="pet" name="pet" defaultValue=""><option value="" disabled>Elige una opción</option><option>Perro</option><option>Gato</option><option>Ambos</option><option>Otro</option></select><button className="button button-dark">¡Quiero saber! <Arrow/></button><small>Al registrarte aceptas recibir novedades de Wufú. Cero spam, palabra de mascota.</small></form>:<div className="success"><div className="success-paw"><Check/></div><h3>¡Ya eres parte<br/>de la manada!</h3><p>La primera pista llegará muy pronto a tu correo.</p><button onClick={()=>setSent(false)} className="text-link">Registrar otro correo</button></div>}</div></div></section>
- <SiteFooter/>
- </main>}
+  return (
+    <main onMouseMove={experience.trackPointer} onClick={experience.leavePrint}>
+      <SecretOverlays
+        found={experience.found}
+        prints={experience.prints}
+        secret={experience.secret}
+        onClose={() => experience.setSecret(null)}
+        onDiscover={experience.discover}
+        onShowLatest={() => experience.setSecret(experience.found.at(-1) ?? "clue")}
+      />
+      <BackToTop
+        hasReward={experience.found.length > 0}
+        visible={experience.scrollProgress > 12 && experience.secret === null}
+      />
+      <div className="scroll-progress" style={{ width: `${experience.scrollProgress}%` }} />
+      <HeroSection onDiscover={experience.discover} onToggleTheme={experience.toggleTheme} />
+      <PillarsSection />
+      <RevealSection onDiscover={() => experience.discover("clock")} />
+      <FaqSection />
+      <SignupSection foundCount={experience.found.length} />
+      <SiteFooter />
+    </main>
+  );
+}

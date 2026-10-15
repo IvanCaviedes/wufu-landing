@@ -6,10 +6,7 @@ export default function PawMark({
   small?: boolean;
 }) {
   return (
-    <span
-      className={`paw ${small ? "small" : ""} ${light ? "light" : ""}`}
-      aria-hidden="true"
-    >
+    <span className={`paw ${small ? "small" : ""} ${light ? "light" : ""}`} aria-hidden="true">
       <i />
       <i />
       <i />

@@ -2,13 +2,10 @@
 
 import Link from "next/link";
 import { ArrowRight, Moon, Sun } from "lucide-react";
-import BrandLogo from "./brand-logo";
 import PawMark from "./paw-mark";
 import styles from "./site-chrome.module.css";
 
-type NavbarProps =
-  | { variant: "legal" }
-  | { variant: "landing"; dark: boolean; onToggleTheme: () => void };
+type NavbarProps = { variant: "legal" } | { variant: "landing"; onToggleTheme: () => void };
 
 export default function Navbar(props: NavbarProps) {
   if (props.variant === "legal") {
@@ -45,16 +42,17 @@ export default function Navbar(props: NavbarProps) {
         </span>
       </a>
       <div className="nav-links">
-        <a href="#pistas">Pistas</a>
+        <a href="#proposito">Nuestro propósito</a>
         <a href="#preguntas">Preguntas</a>
       </div>
       <div className="nav-actions">
         <button
           className="theme-toggle"
           onClick={props.onToggleTheme}
-          aria-label={props.dark ? "Activar modo claro" : "Activar modo oscuro"}
+          aria-label="Cambiar tema de color"
         >
-          {props.dark ? <Sun /> : <Moon />}
+          <Moon className="theme-icon-light" aria-hidden="true" />
+          <Sun className="theme-icon-dark" aria-hidden="true" />
         </button>
         <a className="nav-cta" href="#unete">
           Quiero enterarme <ArrowRight />
