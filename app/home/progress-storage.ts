@@ -4,6 +4,10 @@ import type { SecretId } from "./types";
 
 const progressKey = "wufu.opening-signals.v2";
 
+export function clearProgress() {
+  localStorage.removeItem(progressKey);
+}
+
 async function createSecretKey() {
   const source = `${publicConfig.brandName}-${publicConfig.campaignYear}-discoveries`;
   const bytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(source));

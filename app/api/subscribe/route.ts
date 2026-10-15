@@ -1,9 +1,10 @@
-import { createHmac, randomUUID } from "node:crypto";
+import { createHash, createHmac, randomBytes, randomUUID } from "node:crypto";
 
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import { createSupabaseAdmin } from "../../lib/supabase-admin";
+import { sendConfirmationEmail } from "../../lib/resend";
 
 const subscriptionSchema = z.object({
   name: z
@@ -30,8 +31,6 @@ const subscriptionSchema = z.object({
   website: z.string().max(0),
   turnstileToken: z.string().min(1).max(2_048),
 });
-
-type Subscription = z.infer<typeof subscriptionSchema>;
 
 function jsonError(error: string, status: number, retryAfter?: number) {
   const response = NextResponse.json({ ok: false, error }, { status });
@@ -95,25 +94,6 @@ async function verifyTurnstile(token: string, remoteIp: string) {
   return result.success === true && result.action === "subscribe";
 }
 
-async function syncWithResend(input: Subscription) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const audienceId = process.env.RESEND_AUDIENCE_ID;
-  if (!apiKey || !audienceId) return false;
-
-  const response = await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ email: input.email, first_name: input.name, unsubscribed: false }),
-    signal: AbortSignal.timeout(5_000),
-  });
-
-  if (!response.ok && response.status !== 409) {
-    console.error("Resend contact sync failed", response.status);
-    return false;
-  }
-  return true;
-}
-
 export async function POST(request: Request) {
   if (!request.headers.get("content-type")?.startsWith("application/json"))
     return jsonError("Tipo de solicitud no permitido", 415);
@@ -133,7 +113,13 @@ export async function POST(request: Request) {
     const input = parsed.data;
     const supabase = createSupabaseAdmin();
     const rateLimitSecret = process.env.RATE_LIMIT_SECRET;
-    if (!supabase || !rateLimitSecret || !process.env.TURNSTILE_SECRET_KEY) {
+    if (
+      !supabase ||
+      !rateLimitSecret ||
+      !process.env.TURNSTILE_SECRET_KEY ||
+      !process.env.RESEND_API_KEY ||
+      !process.env.RESEND_FROM_EMAIL
+    ) {
       console.error("Subscription security configuration is incomplete");
       return jsonError("El registro aún no está disponible", 503);
     }
@@ -160,29 +146,38 @@ export async function POST(request: Request) {
     if (!(await verifyTurnstile(input.turnstileToken, clientIp)))
       return jsonError("No pudimos verificar que seas una persona", 400);
 
-    const now = new Date().toISOString();
-    const { error } = await supabase.from("subscribers").insert({
-      email: input.email,
-      name: input.name,
-      pet_type: input.petType,
-      discovery_source: input.discoverySource,
-      // El progreso enviado por el navegador no acredita premios reales.
-      signals_found: 0,
-      reward_unlocked: false,
-      marketing_consent: input.marketingConsent,
-      consented_at: now,
-      consent_version: "launch-2026-v1",
-      updated_at: now,
+    const token = randomBytes(32).toString("base64url");
+    const tokenHash = createHash("sha256").update(token).digest("hex");
+    const now = new Date();
+    const expiresAt = new Date(now.getTime() + 30 * 60 * 1_000);
+    const { data: shouldSend, error } = await supabase.rpc("register_pending_subscriber", {
+      p_email: input.email,
+      p_name: input.name,
+      p_pet_type: input.petType,
+      p_discovery_source: input.discoverySource,
+      p_marketing_consent: input.marketingConsent,
+      p_consented_at: now.toISOString(),
+      p_consent_version: "launch-2026-v1",
+      p_token_hash: tokenHash,
+      p_token_expires_at: expiresAt.toISOString(),
     });
 
-    if (error?.code === "23505") return NextResponse.json({ ok: true, emailSynced: true });
     if (error) {
-      console.error("Supabase subscriber insert failed", error.code);
-      return jsonError("No pudimos completar el registro", 502);
+      console.error("Pending subscriber registration failed", error.code);
+      return jsonError("El registro aún no está configurado por completo", 503);
     }
 
-    const emailSynced = await syncWithResend(input);
-    return NextResponse.json({ ok: true, emailSynced });
+    // Respondemos igual para correos ya confirmados y evitamos revelar sus registros.
+    if (!shouldSend) return NextResponse.json({ ok: true, confirmationRequired: true });
+
+    const confirmationUrl = new URL("/api/subscribe/confirm", request.url);
+    confirmationUrl.searchParams.set("token", token);
+
+    if (!(await sendConfirmationEmail(input.email, confirmationUrl.toString()))) {
+      return jsonError("No pudimos enviar el correo de confirmación", 502);
+    }
+
+    return NextResponse.json({ ok: true, confirmationRequired: true });
   } catch (error) {
     if (error instanceof SyntaxError) return jsonError("Solicitud inválida", 400);
     console.error("Subscription request failed", error instanceof Error ? error.name : "unknown");

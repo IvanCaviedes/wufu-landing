@@ -8,7 +8,13 @@ import { Arrow } from "./arrow";
 import { totalSecrets } from "./data";
 import { TurnstileWidget } from "./turnstile-widget";
 
-export function SignupSection({ foundCount }: { foundCount: number }) {
+export function SignupSection({
+  foundCount,
+  onRegistrationSent,
+}: {
+  foundCount: number;
+  onRegistrationSent: () => void;
+}) {
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -48,8 +54,9 @@ export function SignupSection({ foundCount }: { foundCount: number }) {
 
       if (!response.ok) throw new Error(error);
 
-      setSent(true);
       form.reset();
+      onRegistrationSent();
+      setSent(true);
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : "No pudimos completar el registro");
       setTurnstileToken("");
@@ -200,11 +207,14 @@ export function SignupSection({ foundCount }: { foundCount: number }) {
                 <Check />
               </div>
               <h3>
-                ¡Ya eres parte
+                Revisa tu correo
                 <br />
-                de la manada!
+                para confirmar
               </h3>
-              <p>La primera novedad llegará muy pronto a tu correo.</p>
+              <p>
+                Te enviamos un enlace que vence en 30 minutos. Solo después de abrirlo quedarás
+                dentro de la manada.
+              </p>
               <button type="button" onClick={() => setSent(false)} className="text-link">
                 Registrar otro correo
               </button>

@@ -32,7 +32,10 @@ export default function Home() {
       <PillarsSection />
       <RevealSection onDiscover={() => experience.discover("clock")} />
       <FaqSection />
-      <SignupSection foundCount={experience.found.length} />
+      <SignupSection
+        foundCount={experience.found.length}
+        onRegistrationSent={experience.resetDiscoveries}
+      />
       <SiteFooter />
     </main>
   );

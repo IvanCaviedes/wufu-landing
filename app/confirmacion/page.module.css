@@ -1,0 +1,90 @@
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  background: radial-gradient(circle at 18% 12%, #14bba629 0 120px, transparent 121px), #f4ede1;
+  color: #07383f;
+}
+
+.card {
+  width: min(100%, 560px);
+  padding: clamp(34px, 7vw, 58px);
+  border: 1px solid #07383f1f;
+  border-radius: 28px;
+  background: #fffaf1;
+  box-shadow: 0 24px 80px #07383f1f;
+  text-align: center;
+}
+
+.icon {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #14bba6;
+  color: #07383f;
+}
+
+.icon svg {
+  width: 34px;
+  height: 34px;
+  stroke-width: 2.5;
+}
+
+.errorIcon {
+  background: #efe1cf;
+  color: #875d36;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: #0b9588;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.card h1 {
+  margin: 0;
+  font-family: "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
+  font-size: clamp(2rem, 7vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.card p:not(.eyebrow) {
+  margin: 20px auto 30px;
+  color: #5d7475;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.button {
+  display: inline-flex;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: #07383f;
+  color: #fffaf1;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    background: #131514;
+    color: #f2efe8;
+  }
+
+  .card {
+    border-color: #ffffff1c;
+    background: #1d201e;
+  }
+
+  .card p:not(.eyebrow) {
+    color: #aab7b4;
+  }
+}

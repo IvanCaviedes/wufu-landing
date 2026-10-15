@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react
 
 import { publicConfig } from "../config/public";
 import { secretAlertDurationMs } from "./data";
-import { loadProgress, saveProgress } from "./progress-storage";
+import { clearProgress, loadProgress, saveProgress } from "./progress-storage";
 import type { PawPrintPosition, SecretId } from "./types";
 
 export function useHomeExperience() {
@@ -21,6 +21,14 @@ export function useHomeExperience() {
       void saveProgress(next);
       return next;
     });
+  }, []);
+
+  const resetDiscoveries = useCallback(() => {
+    clearProgress();
+    typed.current = "";
+    setFound([]);
+    setPrints([]);
+    setSecret(null);
   }, []);
 
   useEffect(() => {
@@ -92,6 +100,7 @@ export function useHomeExperience() {
     found,
     leavePrint,
     prints,
+    resetDiscoveries,
     scrollProgress,
     secret,
     setSecret,
