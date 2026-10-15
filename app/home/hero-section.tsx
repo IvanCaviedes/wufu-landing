@@ -8,11 +8,12 @@ import { Arrow } from "./arrow";
 import type { SecretId } from "./types";
 
 type HeroSectionProps = {
+  found: SecretId[];
   onDiscover: (secret: SecretId) => void;
   onToggleTheme: () => void;
 };
 
-export function HeroSection({ onDiscover, onToggleTheme }: HeroSectionProps) {
+export function HeroSection({ found, onDiscover, onToggleTheme }: HeroSectionProps) {
   return (
     <section className="hero" id="inicio">
       <Navbar variant="landing" onToggleTheme={onToggleTheme} />
@@ -60,11 +61,15 @@ export function HeroSection({ onDiscover, onToggleTheme }: HeroSectionProps) {
             type="button"
             className="mystery"
             onClick={() => onDiscover("clue")}
+            disabled={found.includes("clue")}
             aria-label="Descubrir un detalle secreto"
           >
             ?
           </button>
-          <div className="sticker one" onDoubleClick={() => onDiscover("logo")}>
+          <div
+            className={`sticker one ${found.includes("logo") ? "secret-hotspot-found" : ""}`}
+            onDoubleClick={found.includes("logo") ? undefined : () => onDiscover("logo")}
+          >
             Muy
             <br />
             pronto
@@ -73,6 +78,7 @@ export function HeroSection({ onDiscover, onToggleTheme }: HeroSectionProps) {
             type="button"
             className="sticker two"
             onDoubleClick={() => onDiscover("paw")}
+            disabled={found.includes("paw")}
             aria-label="Huella decorativa"
           >
             <Paw light />

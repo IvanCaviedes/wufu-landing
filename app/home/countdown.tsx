@@ -24,7 +24,13 @@ function getTimeLeft(target: number): TimeLeft {
   };
 }
 
-export function Countdown({ onSecret }: { onSecret: () => void }) {
+export function Countdown({
+  onSecret,
+  secretDisabled,
+}: {
+  onSecret: () => void;
+  secretDisabled: boolean;
+}) {
   const configuredTarget = Date.parse(publicConfig.launchAt);
   const target = Number.isFinite(configuredTarget) ? configuredTarget : 0;
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
@@ -50,6 +56,7 @@ export function Countdown({ onSecret }: { onSecret: () => void }) {
             className="time-unit"
             key={key}
             onDoubleClick={key === "seconds" ? onSecret : undefined}
+            disabled={key === "seconds" && secretDisabled}
             aria-label={`${value} ${labels[key]}`}
           >
             <strong>{String(value).padStart(2, "0")}</strong>

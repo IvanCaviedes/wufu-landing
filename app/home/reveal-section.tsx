@@ -5,7 +5,13 @@ import Paw from "../ui/paw-mark";
 import { Arrow } from "./arrow";
 import { Countdown } from "./countdown";
 
-export function RevealSection({ onDiscover }: { onDiscover: () => void }) {
+export function RevealSection({
+  clockDiscovered,
+  onDiscover,
+}: {
+  clockDiscovered: boolean;
+  onDiscover: () => void;
+}) {
   return (
     <section className="reveal section">
       <div className="reveal-grid wrap">
@@ -38,7 +44,7 @@ export function RevealSection({ onDiscover }: { onDiscover: () => void }) {
             Estamos afinando cada detalle para sorprenderte. Mientras tanto, este reloj guarda el
             secreto.
           </p>
-          <Countdown onSecret={onDiscover} />
+          <Countdown secretDisabled={clockDiscovered} onSecret={onDiscover} />
           <a href="#unete" className="button button-cream">
             Avísenme primero <Arrow />
           </a>

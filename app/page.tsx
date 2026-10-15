@@ -28,9 +28,16 @@ export default function Home() {
         visible={experience.scrollProgress > 12 && experience.secret === null}
       />
       <div className="scroll-progress" style={{ width: `${experience.scrollProgress}%` }} />
-      <HeroSection onDiscover={experience.discover} onToggleTheme={experience.toggleTheme} />
+      <HeroSection
+        found={experience.found}
+        onDiscover={experience.discover}
+        onToggleTheme={experience.toggleTheme}
+      />
       <PillarsSection />
-      <RevealSection onDiscover={() => experience.discover("clock")} />
+      <RevealSection
+        clockDiscovered={experience.found.includes("clock")}
+        onDiscover={() => experience.discover("clock")}
+      />
       <FaqSection />
       <SignupSection
         foundCount={experience.found.length}

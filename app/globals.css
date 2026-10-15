@@ -2021,11 +2021,40 @@ h2 {
   list-style: none;
 }
 .hint-panel li {
+  position: relative;
   display: grid;
-  grid-template-columns: 28px 1fr;
+  grid-template-columns: 28px 1fr 18px;
   gap: 10px;
   padding: 11px 0;
   border-top: 1px solid var(--line);
+}
+.hint-panel li.found {
+  opacity: 0.62;
+}
+.hint-panel li.found::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--aqua) 72%, transparent);
+  transform: rotate(-1deg);
+  pointer-events: none;
+}
+.hint-panel li > svg {
+  width: 16px;
+  height: 16px;
+  color: var(--aqua);
+}
+.secret-hotspot-found,
+.mystery:disabled,
+.sticker.two:disabled,
+.time-unit:disabled {
+  pointer-events: none;
+  cursor: default;
 }
 .hint-panel li > span {
   color: var(--aqua);

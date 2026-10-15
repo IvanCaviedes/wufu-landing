@@ -13,8 +13,12 @@ export function useHomeExperience() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [secret, setSecret] = useState<SecretId | null>(null);
   const typed = useRef("");
+  const foundRef = useRef(new Set<SecretId>());
 
   const discover = useCallback((value: SecretId) => {
+    if (foundRef.current.has(value)) return;
+
+    foundRef.current.add(value);
     setSecret(value);
     setFound((current) => {
       const next = current.includes(value) ? current : [...current, value];
@@ -25,6 +29,7 @@ export function useHomeExperience() {
 
   const resetDiscoveries = useCallback(() => {
     clearProgress();
+    foundRef.current.clear();
     typed.current = "";
     setFound([]);
     setPrints([]);
@@ -33,7 +38,10 @@ export function useHomeExperience() {
 
   useEffect(() => {
     const systemTheme = matchMedia("(prefers-color-scheme: dark)");
-    void loadProgress().then(setFound);
+    void loadProgress().then((progress) => {
+      foundRef.current = new Set(progress);
+      setFound(progress);
+    });
 
     function followSystemTheme(event: MediaQueryListEvent) {
       if (localStorage.getItem("wufu-theme")) return;

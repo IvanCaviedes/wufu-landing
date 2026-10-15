@@ -3,6 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import {
   ArrowRight,
+  Check,
   ChevronDown,
   Gift,
   Lightbulb,
@@ -152,12 +153,17 @@ export function SecretOverlays({
                 </button>
               </div>
               <ol>
-                {pendingSecrets.map((id, index) => (
-                  <li key={id}>
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <p>{secretDetails[id].hint}</p>
-                  </li>
-                ))}
+                {secretIds.map((id, index) => {
+                  const wasFound = found.includes(id);
+
+                  return (
+                    <li key={id} className={wasFound ? "found" : ""}>
+                      <span>{String(index + 1).padStart(2, "0")}</span>
+                      <p>{secretDetails[id].hint}</p>
+                      {wasFound && <Check aria-label="Encontrada" />}
+                    </li>
+                  );
+                })}
               </ol>
               {pendingSecrets.includes("code") && (
                 <div className={`secret-word-entry ${wordInputOpen ? "open" : ""}`}>
