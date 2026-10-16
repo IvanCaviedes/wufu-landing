@@ -155,6 +155,8 @@ export async function POST(request: Request) {
       p_name: input.name,
       p_pet_type: input.petType,
       p_discovery_source: input.discoverySource,
+      p_signals_found: input.signalsFound,
+      p_reward_unlocked: input.rewardUnlocked,
       p_marketing_consent: input.marketingConsent,
       p_consented_at: now.toISOString(),
       p_consent_version: "launch-2026-v1",

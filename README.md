@@ -20,8 +20,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 1. Copia `.env.example` como `.env.local` y completa `SUPABASE_URL` y
    `SUPABASE_SERVICE_ROLE_KEY` con credenciales exclusivas del servidor.
-2. Ejecuta en Supabase la migración
-   `supabase/migrations/20261015_create_subscribers.sql`.
+2. Ejecuta en Supabase, en orden, las migraciones de `supabase/migrations/`.
 3. Completa opcionalmente `RESEND_API_KEY` y `RESEND_AUDIENCE_ID` para sincronizar los
    registros con la lista de correo.
 

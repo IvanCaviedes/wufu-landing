@@ -56,6 +56,13 @@ export function useHomeExperience() {
     }
 
     function handleKeydown(event: KeyboardEvent) {
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        (target.isContentEditable || target.closest("input, select, textarea, button, a"))
+      )
+        return;
+
       typed.current = (typed.current + event.key.toLowerCase()).slice(
         -publicConfig.secretWord.length,
       );
@@ -91,7 +98,13 @@ export function useHomeExperience() {
   }
 
   function leavePrint(event: MouseEvent<HTMLElement>) {
-    if ((event.target as HTMLElement).closest("input, select")) return;
+    if (
+      (event.target as HTMLElement).closest(
+        "form, input, select, textarea, button, a, [contenteditable='true']",
+      )
+    )
+      return;
+
     const id = Date.now();
     setPrints((current) => [
       ...current.slice(-7),
