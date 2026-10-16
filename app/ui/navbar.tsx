@@ -16,10 +16,10 @@ export default function Navbar(props: NavbarProps) {
             className={styles.legalBrand}
             href="/#inicio"
             prefetch={false}
-            aria-label="Wufú, volver al inicio"
+            aria-label="Rumi, volver al inicio"
           >
             <div className="logo">
-              wufú
+              rumi
               <span>
                 <PawMark small />
               </span>
@@ -35,8 +35,8 @@ export default function Navbar(props: NavbarProps) {
 
   return (
     <nav className="nav wrap">
-      <a className="logo" href="#inicio" aria-label="Wufú, inicio">
-        wufú
+      <a className="logo" href="#inicio" aria-label="Rumi, inicio">
+        rumi
         <span>
           <PawMark small />
         </span>

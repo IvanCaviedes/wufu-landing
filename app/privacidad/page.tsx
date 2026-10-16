@@ -61,7 +61,7 @@ export default function Privacidad() {
               <strong>
                 {legalConfig.city}, {legalConfig.country}
               </strong>
-              , es responsable del tratamiento de los datos recopilados por Wufú. Canal de
+              , es responsable del tratamiento de los datos recopilados por Rumi. Canal de
               privacidad: <strong>{legalConfig.privacyEmail}</strong>.
             </p>
           </section>

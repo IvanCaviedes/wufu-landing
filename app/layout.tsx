@@ -4,7 +4,7 @@ import { publicConfig } from "./config/public";
 import ThemeScript from "./ui/theme-script";
 const siteUrl = publicConfig.siteUrl;
 const siteDescription =
-  "Conoce Wufú, la próxima tienda de mascotas en Colombia, con productos para perros y gatos elegidos para su bienestar, cuidado y vida diaria.";
+  "Conoce Rumi, la próxima tienda de mascotas en Colombia, con productos para perros y gatos elegidos para su bienestar, cuidado y vida diaria.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -20,8 +20,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/images/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   keywords: [
-    "Wufú",
-    "Wufu",
+    "Rumi",
     "tienda de mascotas",
     "tienda de mascotas Colombia",
     "productos para mascotas",
@@ -75,7 +74,7 @@ const schema = {
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
       name: publicConfig.brandName,
-      alternateName: "Wufu",
+      alternateName: "Rumi",
       url: siteUrl,
       slogan: "Más vidas juntas",
       description: siteDescription,
@@ -86,7 +85,7 @@ const schema = {
       "@id": `${siteUrl}/#website`,
       url: siteUrl,
       name: publicConfig.brandName,
-      alternateName: "Wufu",
+      alternateName: "Rumi",
       description: siteDescription,
       inLanguage: "es-CO",
       publisher: { "@id": `${siteUrl}/#organization` },

@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: base,
       changeFrequency: "weekly",
       priority: 1,
-      images: [`${base}/images/wufu-hero-v2.webp`, `${base}/images/wufu-bond-v2.webp`],
+      images: [`${base}/images/rumi-hero-v2.webp`, `${base}/images/rumi-bond-v2.webp`],
     },
     {
       url: `${base}/privacidad`,

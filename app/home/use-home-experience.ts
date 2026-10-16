@@ -45,7 +45,7 @@ export function useHomeExperience(season: CampaignSeason) {
     });
 
     function followSystemTheme(event: MediaQueryListEvent) {
-      if (localStorage.getItem("wufu-theme")) return;
+      if (localStorage.getItem("rumi-theme")) return;
 
       document.documentElement.dataset.theme = event.matches ? "dark" : "light";
     }
@@ -90,7 +90,7 @@ export function useHomeExperience(season: CampaignSeason) {
   function toggleTheme() {
     const nextTheme = document.documentElement.dataset.theme !== "dark";
     document.documentElement.dataset.theme = nextTheme ? "dark" : "light";
-    localStorage.setItem("wufu-theme", nextTheme ? "dark" : "light");
+    localStorage.setItem("rumi-theme", nextTheme ? "dark" : "light");
   }
 
   function trackPointer(event: MouseEvent<HTMLElement>) {

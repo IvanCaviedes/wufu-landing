@@ -1,7 +1,7 @@
 const initializeTheme = `
   (() => {
     try {
-      const savedTheme = localStorage.getItem("wufu-theme");
+      const savedTheme = localStorage.getItem("rumi-theme");
       const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
       document.documentElement.dataset.theme = savedTheme ?? (prefersDark ? "dark" : "light");
     } catch {

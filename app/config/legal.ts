@@ -1,7 +1,7 @@
 const value = (name: string, fallback: string) => process.env[name]?.trim() || fallback;
 
 export const legalConfig = {
-  companyName: value("LEGAL_COMPANY_NAME", "Wufú [RAZÓN SOCIAL PENDIENTE]"),
+  companyName: value("LEGAL_COMPANY_NAME", "Rumi [RAZÓN SOCIAL PENDIENTE]"),
   nit: value("LEGAL_NIT", "[NIT PENDIENTE]"),
   address: value("LEGAL_ADDRESS", "[DIRECCIÓN PENDIENTE]"),
   city: value("LEGAL_CITY", "[CIUDAD PENDIENTE]"),

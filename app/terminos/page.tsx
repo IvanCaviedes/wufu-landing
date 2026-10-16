@@ -19,7 +19,7 @@ export default function Terminos() {
           <h1>Términos y condiciones.</h1>
           <p className={styles.lead}>
             Condiciones para el acceso a la landing, el registro al lanzamiento y la experiencia
-            interactiva de Wufú.
+            interactiva de Rumi.
           </p>
         </div>
         <aside className={styles.meta}>
@@ -57,7 +57,7 @@ export default function Terminos() {
             <p>
               El sitio es operado por <strong>[RAZÓN SOCIAL]</strong>, NIT <strong>[NIT]</strong>,
               domicilio <strong>[DIRECCIÓN, CIUDAD]</strong>, teléfono <strong>[TELÉFONO]</strong> y
-              correo <strong>[CORREO]</strong>, en adelante “Wufú”.
+              correo <strong>[CORREO]</strong>, en adelante “Rumi”.
             </p>
           </section>
           <section id="aceptacion" className={styles.section}>
@@ -73,7 +73,7 @@ export default function Terminos() {
             <p>
               La landing anuncia un próximo lanzamiento. Su contenido es informativo y no constituye
               oferta de venta mientras no se indiquen producto, precio, disponibilidad y condiciones
-              esenciales. Wufú puede actualizar contenido sin afectar derechos adquiridos.
+              esenciales. Rumi puede actualizar contenido sin afectar derechos adquiridos.
             </p>
           </section>
           <section id="dinamica" className={styles.section}>
@@ -93,7 +93,7 @@ export default function Terminos() {
             </ul>
             <p>
               No se exige pago para participar. Podrá invalidarse progreso automatizado, fraudulento
-              o manipulado. Las condiciones definitivas obligarán a Wufú desde su publicación.
+              o manipulado. Las condiciones definitivas obligarán a Rumi desde su publicación.
             </p>
           </section>
           <section id="registro" className={styles.section}>
@@ -107,7 +107,7 @@ export default function Terminos() {
           <section id="propiedad" className={styles.section}>
             <h2>6. Propiedad intelectual y usos prohibidos</h2>
             <p>
-              Marcas, textos, fotografías, interfaces y código pertenecen a Wufú o se usan con
+              Marcas, textos, fotografías, interfaces y código pertenecen a Rumi o se usan con
               autorización. Solo se permite uso personal y no comercial. Se prohíbe copiar, vender,
               alterar, extraer datos automáticamente, interferir con la seguridad, suplantar
               usuarios o manipular la dinámica.
@@ -116,7 +116,7 @@ export default function Terminos() {
           <section id="responsabilidad" className={styles.section}>
             <h2>7. Disponibilidad y responsabilidad</h2>
             <p>
-              Wufú procura disponibilidad y seguridad, pero no garantiza operación ininterrumpida.
+              Rumi procura disponibilidad y seguridad, pero no garantiza operación ininterrumpida.
               Puede suspender el sitio por mantenimiento, seguridad o fuerza mayor. Nada excluye
               responsabilidades legalmente inderogables ni derechos irrenunciables del consumidor.
               Los sitios de terceros son responsabilidad de sus operadores.
@@ -125,7 +125,7 @@ export default function Terminos() {
           <section id="consumidor" className={styles.section}>
             <h2>8. Protección al consumidor</h2>
             <p>
-              Cuando exista comercio electrónico, Wufú informará identidad, características,
+              Cuando exista comercio electrónico, Rumi informará identidad, características,
               disponibilidad, precio total, impuestos, entrega, retracto, reversión, garantías y
               reclamaciones conforme a la Ley 1480 de 2011. El consumidor puede acudir a la{" "}
               <a href="https://www.sic.gov.co/" target="_blank" rel="noreferrer">

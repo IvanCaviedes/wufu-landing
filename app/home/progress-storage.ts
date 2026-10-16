@@ -2,7 +2,7 @@ import { publicConfig } from "../config/public";
 import { secretIds } from "./data";
 import type { SecretId } from "./types";
 
-const progressKey = "wufu.opening-signals.v2";
+const progressKey = "rumi.opening-signals.v2";
 
 export function clearProgress() {
   localStorage.removeItem(progressKey);

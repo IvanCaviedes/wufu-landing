@@ -20,7 +20,7 @@ export default function SiteFooter({ variant = "landing" }: { variant?: "landing
     <footer>
       <div className="wrap footer-main">
         <a className="logo footer-logo" href="#inicio">
-          wufú
+          rumi
           <span>
             <PawMark small />
           </span>
@@ -34,7 +34,7 @@ export default function SiteFooter({ variant = "landing" }: { variant?: "landing
           </small>
         </p>
         <div className="socials">
-          <a className="instagram" href={publicConfig.instagramUrl} aria-label="Instagram de Wufú">
+          <a className="instagram" href={publicConfig.instagramUrl} aria-label="Instagram de Rumi">
             <Camera />
             <span>Instagram</span>
           </a>
@@ -42,7 +42,7 @@ export default function SiteFooter({ variant = "landing" }: { variant?: "landing
             <Music2 />
             <span>TikTok</span>
           </a>
-          <a className="community" href={publicConfig.communityUrl} aria-label="Comunidad Wufú">
+          <a className="community" href={publicConfig.communityUrl} aria-label="Comunidad Rumi">
             <MessageCircle />
             <span>Comunidad</span>
           </a> */}

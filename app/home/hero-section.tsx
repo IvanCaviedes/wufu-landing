@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Gift, Ghost, Snowflake, Sparkles } from "lucide-react";
 
-import heroImage from "../../public/images/wufu-hero-v2.webp";
+import heroImage from "../../public/images/rumi-hero-v2.webp";
 import type { CampaignSeason } from "../config/campaign";
 import Navbar from "../ui/navbar";
 import Paw from "../ui/paw-mark";
@@ -68,7 +68,7 @@ export function HeroSection({
           <Image
             className="brand-photo"
             src={heroImage}
-            alt="Perro artesanal de Wufú sobre un fondo turquesa"
+            alt="Perro artesanal de Rumi sobre un fondo turquesa"
             fill
             preload
             sizes="(max-width: 900px) 100vw, 45vw"
@@ -88,7 +88,7 @@ export function HeroSection({
             className={`sticker one ${found.includes("logo") ? "secret-hotspot-found" : ""}`}
             onDoubleClick={found.includes("logo") ? undefined : () => onDiscover("logo")}
           >
-            {content.sticker}
+            <span>{content.sticker}</span>
           </div>
           <button
             type="button"

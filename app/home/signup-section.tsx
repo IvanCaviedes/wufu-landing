@@ -167,7 +167,7 @@ export function SignupSection({
               <label className="consent-field">
                 <input type="checkbox" name="marketing_consent" required />
                 <span>
-                  Autorizo el tratamiento de mis datos para recibir novedades de Wufú. Consulta la{" "}
+                  Autorizo el tratamiento de mis datos para recibir novedades de Rumi. Consulta la{" "}
                   <a href="/privacidad" target="_blank" rel="noreferrer">
                     política de privacidad
                   </a>

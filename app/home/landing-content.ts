@@ -3,17 +3,17 @@ import type { LandingPhase } from "../config/campaign";
 const content = {
   prelaunch: {
     hero: {
-      eyebrow: "Wufú está por llegar",
+      eyebrow: "Rumi está por llegar",
       title: "Cuidarlos mejor.",
       accent: "Vivir más juntos.",
       description:
-        "Muy pronto llega Wufú, una tienda de mascotas en Colombia con productos para perros y gatos elegidos para su bienestar y cuidado diario.",
+        "Muy pronto llega Rumi, una tienda de mascotas en Colombia con productos para perros y gatos elegidos para su bienestar y cuidado diario.",
       primary: "Quiero acceso anticipado",
       secondary: "Descubrir la idea",
       whisper: "Explora con atención: esta historia esconde algunas señales.",
       sticker: "En construcción",
       marquee:
-        "CUIDADO CON PROPÓSITO　✦　DECISIONES MÁS SIMPLES　✦　VIDAS MÁS FELICES　✦　WUFÚ SE ACERCA　✦",
+        "CUIDADO CON PROPÓSITO　✦　DECISIONES MÁS SIMPLES　✦　VIDAS MÁS FELICES　✦　RUMI SE ACERCA　✦",
     },
     intro: {
       kicker: "01 — Lo que estamos construyendo",
@@ -42,8 +42,8 @@ const content = {
       title: "Llega antes.",
       accent: "Vívelo primero.",
       description:
-        "Únete a la lista privada de Wufú y recibe los anuncios importantes antes de que sean públicos.",
-      trust: "Tus datos se usan únicamente para novedades y beneficios de Wufú.",
+        "Únete a la lista privada de Rumi y recibe los anuncios importantes antes de que sean públicos.",
+      trust: "Tus datos se usan únicamente para novedades y beneficios de Rumi.",
       submit: "Quiero acceso anticipado",
     },
   },
@@ -51,18 +51,18 @@ const content = {
     hero: {
       eyebrow: "La apertura ya tiene fecha",
       title: "La espera termina.",
-      accent: "Wufú está por abrir.",
+      accent: "Rumi está por abrir.",
       description:
         "Muy pronto podrás descubrir una tienda de mascotas con productos para perros y gatos, creada para cuidar mejor y disfrutar más juntos.",
       primary: "Recibir mi invitación",
-      secondary: "Conocer Wufú",
+      secondary: "Conocer Rumi",
       whisper: "Encuentra las cinco señales y desbloquea tu pase de apertura.",
       sticker: "Abrimos pronto",
       marquee:
         "YA CASI ABRIMOS　✦　PRODUCTOS ELEGIDOS CON CUIDADO　✦　UNA EXPERIENCIA PARA DISFRUTAR JUNTOS　✦",
     },
     intro: {
-      kicker: "01 — La experiencia Wufú",
+      kicker: "01 — La experiencia Rumi",
       title: "Todo lo que necesitas.",
       accent: "Mucho más cerca.",
       description:
@@ -89,26 +89,26 @@ const content = {
       accent: "la apertura.",
       description:
         "Déjanos tus datos para recibir la información oficial y beneficios especiales de lanzamiento.",
-      trust: "Tus datos se usan únicamente para novedades y beneficios de Wufú.",
+      trust: "Tus datos se usan únicamente para novedades y beneficios de Rumi.",
       submit: "Recibir mi invitación",
     },
   },
   open: {
     hero: {
-      eyebrow: "Wufú ya abrió sus puertas",
+      eyebrow: "Rumi ya abrió sus puertas",
       title: "Más bienestar.",
       accent: "Más vidas juntas.",
       description:
         "Visita nuestra tienda de mascotas y descubre productos seleccionados y atención cercana para cuidar a tu perro o gato con más confianza.",
       primary: "Planear mi visita",
       secondary: "Conocer la experiencia",
-      whisper: "La comunidad Wufú apenas comienza. Siempre habrá algo nuevo por descubrir.",
+      whisper: "La comunidad Rumi apenas comienza. Siempre habrá algo nuevo por descubrir.",
       sticker: "Ya abrimos",
       marquee:
-        "WUFÚ YA ESTÁ AQUÍ　✦　VEN A CONOCERNOS　✦　BIENESTAR PARA PERROS Y GATOS　✦　MÁS VIDAS JUNTAS　✦",
+        "RUMI YA ESTÁ AQUÍ　✦　VEN A CONOCERNOS　✦　BIENESTAR PARA PERROS Y GATOS　✦　MÁS VIDAS JUNTAS　✦",
     },
     intro: {
-      kicker: "01 — Bienvenido a Wufú",
+      kicker: "01 — Bienvenido a Rumi",
       title: "Cuidar mejor se siente",
       accent: "así de simple.",
       description:
@@ -132,10 +132,10 @@ const content = {
     signup: {
       kicker: "04 — Sigue cerca",
       title: "Únete a la",
-      accent: "comunidad Wufú.",
+      accent: "comunidad Rumi.",
       description:
         "Recibe novedades, actividades y recomendaciones para compartir una vida mejor con tu mascota.",
-      trust: "Tus datos se usan únicamente para comunicaciones de Wufú.",
+      trust: "Tus datos se usan únicamente para comunicaciones de Rumi.",
       submit: "Unirme a la comunidad",
     },
   },

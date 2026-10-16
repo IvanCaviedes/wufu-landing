@@ -3,12 +3,12 @@ import { join } from "node:path";
 
 import { ImageResponse } from "next/og";
 
-export const alt = "Perro artesanal de Wufú y anuncio de la próxima tienda de mascotas en Colombia";
+export const alt = "Perro artesanal de Rumi y anuncio de la próxima tienda de mascotas en Colombia";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 // Keep a lightweight PNG just for Satori; the page itself uses WebP.
-const heroData = await readFile(join(process.cwd(), "public/images/wufu-hero-og.png"));
+const heroData = await readFile(join(process.cwd(), "public/images/rumi-hero-og.png"));
 const heroSrc = `data:image/png;base64,${heroData.toString("base64")}`;
 
 export default function Image() {
@@ -35,7 +35,7 @@ export default function Image() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center" }}>
-          <span style={{ fontSize: 34, fontWeight: 900, color: "#31d8c2" }}>wufú</span>
+          <span style={{ fontSize: 34, fontWeight: 900, color: "#31d8c2" }}>rumi</span>
           <span
             style={{
               width: 8,
@@ -78,7 +78,7 @@ export default function Image() {
         </div>
 
         <span style={{ fontSize: 22, fontWeight: 700, color: "#31d8c2" }}>
-          Descubre lo que viene en wufu.pet
+          Descubre lo que viene en somosrumi.pet
         </span>
       </div>
 

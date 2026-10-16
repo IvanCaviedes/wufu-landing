@@ -22,7 +22,7 @@ async function ConfirmationCard({ searchParams }: { searchParams: ConfirmationSe
       <div className={`${styles.icon} ${confirmed ? "" : styles.errorIcon}`}>
         {confirmed ? <Check aria-hidden="true" /> : <ClockAlert aria-hidden="true" />}
       </div>
-      <p className={styles.eyebrow}>Wufú · Más vidas juntas</p>
+      <p className={styles.eyebrow}>Rumi · Más vidas juntas</p>
       <h1>{confirmed ? "Correo confirmado" : "No pudimos confirmar"}</h1>
       <p>
         {confirmed
@@ -32,7 +32,7 @@ async function ConfirmationCard({ searchParams }: { searchParams: ConfirmationSe
             : "El enlace ya fue utilizado, venció o no es válido. Puedes volver al formulario para solicitar uno nuevo."}
       </p>
       <Link href={confirmed ? "/" : "/#unete"} className={styles.button}>
-        {confirmed ? "Volver a Wufú" : "Solicitar otro enlace"}
+        {confirmed ? "Volver a Rumi" : "Solicitar otro enlace"}
       </Link>
     </section>
   );

@@ -18,7 +18,7 @@ export function FaqSection({
   const phaseFaqs =
     campaign.phase === "open"
       ? [
-          { question: "¿Dónde está Wufú?", answer: `Nos encuentras en ${campaign.location}.` },
+          { question: "¿Dónde está Rumi?", answer: `Nos encuentras en ${campaign.location}.` },
           { question: "¿Cuál es el horario?", answer: campaign.openingHours },
           ...faqs.filter(({ question }) => !question.includes("Cuándo y dónde")),
         ]

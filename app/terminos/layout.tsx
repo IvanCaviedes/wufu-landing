@@ -5,7 +5,7 @@ import SiteFooter from "../ui/site-footer";
 
 export const metadata: Metadata = {
   title: "Términos y condiciones",
-  description: "Consulta los términos y condiciones de uso del sitio web de Wufú.",
+  description: "Consulta los términos y condiciones de uso del sitio web de Rumi.",
   alternates: { canonical: "/terminos" },
 };
 

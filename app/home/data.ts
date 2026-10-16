@@ -4,9 +4,9 @@ import type { SecretId } from "./types";
 
 export const faqs = [
   {
-    question: "¿Qué abrirá primero Wufú?",
+    question: "¿Qué abrirá primero Rumi?",
     answer:
-      "Nuestra primera etapa será una tienda de mascotas física en Colombia: un lugar cercano donde podrás descubrir productos para perros y gatos, recibir orientación y vivir la experiencia Wufú de primera mano.",
+      "Nuestra primera etapa será una tienda de mascotas física en Colombia: un lugar cercano donde podrás descubrir productos para perros y gatos, recibir orientación y vivir la experiencia Rumi de primera mano.",
   },
   {
     question: "¿Qué encontraré en la tienda?",
@@ -19,14 +19,14 @@ export const faqs = [
       "Anunciaremos muy pronto la ubicación y la fecha de apertura. Las personas inscritas en nuestra lista serán las primeras en recibir la información y conocer las novedades de lanzamiento.",
   },
   {
-    question: "¿Wufú tendrá una aplicación?",
+    question: "¿Rumi tendrá una aplicación?",
     answer:
-      "Sí, pero todavía está en desarrollo. La aplicación será una etapa posterior de Wufú y complementará la experiencia de la tienda física. Compartiremos sus avances cuando esté lista para ofrecer una experiencia sólida y útil.",
+      "Sí, pero todavía está en desarrollo. La aplicación será una etapa posterior de Rumi y complementará la experiencia de la tienda física. Compartiremos sus avances cuando esté lista para ofrecer una experiencia sólida y útil.",
   },
   {
     question: "¿La experiencia será para perros y gatos?",
     answer:
-      "Sí. La primera etapa de Wufú está pensada para familias con perros y gatos, con una propuesta que reconoce sus diferentes necesidades y formas de cuidado.",
+      "Sí. La primera etapa de Rumi está pensada para familias con perros y gatos, con una propuesta que reconoce sus diferentes necesidades y formas de cuidado.",
   },
   {
     question: "¿Tiene algún costo unirme a la lista?",
@@ -80,7 +80,7 @@ export const secretAlertDurationMs = 5_000;
 export const secretDetails: Record<SecretId, { hint: string; message: string; title: string }> = {
   clue: {
     title: "La primera puerta",
-    message: "El primer capítulo de Wufú será un lugar real que podrás visitar con tu mascota.",
+    message: "El primer capítulo de Rumi será un lugar real que podrás visitar con tu mascota.",
     hint: "La curiosidad abre puertas. En la portada hay algo que parece estar haciendo una pregunta.",
   },
   logo: {
@@ -90,7 +90,7 @@ export const secretDetails: Record<SecretId, { hint: string; message: string; ti
   },
   paw: {
     title: "Ellos son protagonistas",
-    message: "Perros y gatos estarán en el centro de la primera experiencia Wufú.",
+    message: "Perros y gatos estarán en el centro de la primera experiencia Rumi.",
     hint: "La marca de nuestros verdaderos protagonistas está escondida cerca del primer encuentro.",
   },
   clock: {
