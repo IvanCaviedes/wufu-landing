@@ -69,7 +69,12 @@ export function TurnstileWidget({
         strategy="lazyOnload"
         onReady={renderWidget}
       />
-      <div ref={containerRef} className="turnstile-widget" aria-label="Verificación de seguridad" />
+      <div
+        ref={containerRef}
+        className="turnstile-widget"
+        role="group"
+        aria-label="Verificación de seguridad"
+      />
     </>
   );
 }
