@@ -10,7 +10,8 @@ export type CampaignSettings = {
 };
 
 const phaseValues = new Set<LandingPhase>(["prelaunch", "launch", "open"]);
-const seasonValues = new Set<CampaignSeason>(["none", "halloween", "christmas"]);
+const forcedSeasonValues = new Set<CampaignSeason>(["halloween", "christmas"]);
+const automaticValues = new Set(["", "auto", "none"]);
 
 function parseDate(value: string | undefined, fallback: string) {
   const parsed = Date.parse(value ?? "");
@@ -24,28 +25,33 @@ export function getCampaignSettings(now = Date.now()): CampaignSettings {
     "2026-12-01T00:00:00-05:00";
   const launchAt =
     process.env.LAUNCH_AT || process.env.NEXT_PUBLIC_LAUNCH_AT || "2027-01-01T00:00:00-05:00";
-  const override = process.env.LANDING_PHASE?.toLowerCase() as LandingPhase | undefined;
+  const phaseOverride = process.env.LANDING_PHASE?.trim().toLowerCase() ?? "";
   const halloweenStartsAt = parseDate(process.env.HALLOWEEN_START_AT, "2026-10-01T00:00:00-05:00");
   const halloweenEndsAt = parseDate(process.env.HALLOWEEN_END_AT, "2026-11-03T00:00:00-05:00");
   const christmasStartsAt = parseDate(process.env.CHRISTMAS_START_AT, "2026-12-01T00:00:00-05:00");
   const christmasEndsAt = parseDate(process.env.CHRISTMAS_END_AT, "2027-01-07T00:00:00-05:00");
-  const seasonOverride = process.env.SEASON_OVERRIDE?.toLowerCase() as CampaignSeason | undefined;
-  const phase =
-    override && phaseValues.has(override)
-      ? override
-      : now < parseDate(prelaunchEndsAt, "2026-12-01T00:00:00-05:00")
-        ? "prelaunch"
-        : now < parseDate(launchAt, "2027-01-01T00:00:00-05:00")
-          ? "launch"
-          : "open";
+  const seasonOverride = process.env.SEASON_OVERRIDE?.trim().toLowerCase();
+  const automaticPhase: LandingPhase =
+    now < parseDate(prelaunchEndsAt, "2026-12-01T00:00:00-05:00")
+      ? "prelaunch"
+      : now < parseDate(launchAt, "2027-01-01T00:00:00-05:00")
+        ? "launch"
+        : "open";
+  const phase = automaticValues.has(phaseOverride)
+    ? automaticPhase
+    : phaseValues.has(phaseOverride as LandingPhase)
+      ? (phaseOverride as LandingPhase)
+      : automaticPhase;
   const season =
-    seasonOverride && seasonValues.has(seasonOverride)
-      ? seasonOverride
-      : now >= halloweenStartsAt && now < halloweenEndsAt
-        ? "halloween"
-        : now >= christmasStartsAt && now < christmasEndsAt
-          ? "christmas"
-          : "none";
+    seasonOverride === "off"
+      ? "none"
+      : seasonOverride && forcedSeasonValues.has(seasonOverride as CampaignSeason)
+        ? (seasonOverride as CampaignSeason)
+        : now >= halloweenStartsAt && now < halloweenEndsAt
+          ? "halloween"
+          : now >= christmasStartsAt && now < christmasEndsAt
+            ? "christmas"
+            : "none";
 
   return {
     phase,

@@ -33,12 +33,13 @@ La portada cambia automáticamente todo su contenido según las fechas configura
 - `open`: desde `LAUNCH_AT`.
 
 Configura también `OPENING_LOCATION` y `OPENING_HOURS`. Para revisar o activar una fase manualmente,
-usa `LANDING_PHASE=prelaunch`, `LANDING_PHASE=launch` o `LANDING_PHASE=open`; déjalo vacío para usar
-las fechas.
+usa `LANDING_PHASE=prelaunch`, `LANDING_PHASE=launch` o `LANDING_PHASE=open`; déjalo vacío o usa
+`auto`/`none` para usar las fechas.
 
 Halloween y Navidad también se activan automáticamente usando `HALLOWEEN_START_AT`,
 `HALLOWEEN_END_AT`, `CHRISTMAS_START_AT` y `CHRISTMAS_END_AT`. `SEASON_OVERRIDE` permite forzar
-`halloween`, `christmas` o `none` para pruebas; déjalo vacío para usar el calendario.
+`halloween` o `christmas`; déjalo vacío o usa `auto`/`none` para usar el calendario. Usa `off` si
+quieres desactivar todas las decoraciones estacionales.
 
 La clave `SUPABASE_SERVICE_ROLE_KEY` nunca debe usar el prefijo `NEXT_PUBLIC_` ni enviarse al
 navegador. La tabla tiene Row Level Security activado y las escrituras se realizan únicamente desde
