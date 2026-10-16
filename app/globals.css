@@ -2794,6 +2794,15 @@ h2 {
   object-fit: cover;
   z-index: 0;
 }
+
+.intro,
+.reveal,
+.faq,
+.signup,
+footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
 .hero-visual > .brand-photo {
   border-radius: inherit;
 }

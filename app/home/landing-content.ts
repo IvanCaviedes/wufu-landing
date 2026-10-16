@@ -7,7 +7,7 @@ const content = {
       title: "Cuidarlos mejor.",
       accent: "Vivir más juntos.",
       description:
-        "Muy pronto, una nueva experiencia para el bienestar de perros, gatos y sus familias.",
+        "Muy pronto llega Wufú, una tienda de mascotas en Colombia con productos para perros y gatos elegidos para su bienestar y cuidado diario.",
       primary: "Quiero acceso anticipado",
       secondary: "Descubrir la idea",
       whisper: "Explora con atención: esta historia esconde algunas señales.",
@@ -20,7 +20,7 @@ const content = {
       title: "Un lugar pensado para",
       accent: "vivir mejor juntos.",
       description:
-        "Estamos diseñando cada detalle desde una idea sencilla: cuidar a perros y gatos debería sentirse claro, humano y confiable.",
+        "Estamos creando una tienda para mascotas donde elegir productos para perros y gatos sea más claro, humano y confiable.",
     },
     reveal: {
       kicker: "02 — Antes que nadie",
@@ -53,7 +53,7 @@ const content = {
       title: "La espera termina.",
       accent: "Wufú está por abrir.",
       description:
-        "Muy pronto podrás descubrir una tienda para familias con perros y gatos, creada para cuidar mejor y disfrutar más juntos.",
+        "Muy pronto podrás descubrir una tienda de mascotas con productos para perros y gatos, creada para cuidar mejor y disfrutar más juntos.",
       primary: "Recibir mi invitación",
       secondary: "Conocer Wufú",
       whisper: "Encuentra las cinco señales y desbloquea tu pase de apertura.",
@@ -66,7 +66,7 @@ const content = {
       title: "Todo lo que necesitas.",
       accent: "Mucho más cerca.",
       description:
-        "Una selección para el bienestar cotidiano, orientación cercana y una comunidad que entiende el lugar que ocupan en tu vida.",
+        "Productos para mascotas seleccionados para el bienestar cotidiano, orientación cercana y una comunidad que entiende el lugar que ocupan en tu vida.",
     },
     reveal: {
       kicker: "02 — Cuenta regresiva",
@@ -99,7 +99,7 @@ const content = {
       title: "Más bienestar.",
       accent: "Más vidas juntas.",
       description:
-        "Ven a descubrir productos seleccionados y una atención cercana para cuidar a tu perro o gato con más confianza.",
+        "Visita nuestra tienda de mascotas y descubre productos seleccionados y atención cercana para cuidar a tu perro o gato con más confianza.",
       primary: "Planear mi visita",
       secondary: "Conocer la experiencia",
       whisper: "La comunidad Wufú apenas comienza. Siempre habrá algo nuevo por descubrir.",
@@ -112,7 +112,7 @@ const content = {
       title: "Cuidar mejor se siente",
       accent: "así de simple.",
       description:
-        "Encuentra una selección pensada para la vida real, orientación para elegir con criterio y un espacio creado para disfrutar juntos.",
+        "Encuentra productos para perros y gatos pensados para la vida real, orientación para elegir con criterio y un espacio creado para disfrutar juntos.",
     },
     reveal: {
       kicker: "02 — Visítanos",

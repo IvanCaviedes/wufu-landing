@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Gift, Ghost, Snowflake, Sparkles } from "lucide-react";
 
-import heroImage from "../../public/images/wufu-hero-v2.png";
+import heroImage from "../../public/images/wufu-hero-v2.webp";
 import type { CampaignSeason } from "../config/campaign";
 import Navbar from "../ui/navbar";
 import Paw from "../ui/paw-mark";
@@ -64,13 +64,13 @@ export function HeroSection({
             <span>{content.whisper}</span>
           </div>
         </div>
-        <div className="hero-visual" aria-label="Familia compartiendo con sus mascotas">
+        <div className="hero-visual">
           <Image
             className="brand-photo"
             src={heroImage}
-            alt="Persona compartiendo un momento feliz con su perro y su gato"
+            alt="Perro artesanal de Wufú sobre un fondo turquesa"
             fill
-            priority
+            preload
             sizes="(max-width: 900px) 100vw, 45vw"
           />
           <div className="orbit one" />

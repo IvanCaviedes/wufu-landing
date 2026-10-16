@@ -3,11 +3,12 @@ import { join } from "node:path";
 
 import { ImageResponse } from "next/og";
 
-export const alt = "Wufú, próxima tienda para mascotas — Más vidas juntas";
+export const alt = "Perro artesanal de Wufú y anuncio de la próxima tienda de mascotas en Colombia";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const heroData = await readFile(join(process.cwd(), "public/images/wufu-hero-v2.png"));
+// Keep a lightweight PNG just for Satori; the page itself uses WebP.
+const heroData = await readFile(join(process.cwd(), "public/images/wufu-hero-og.png"));
 const heroSrc = `data:image/png;base64,${heroData.toString("base64")}`;
 
 export default function Image() {

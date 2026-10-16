@@ -34,7 +34,7 @@ export default function SiteFooter({ variant = "landing" }: { variant?: "landing
           </small>
         </p>
         <div className="socials">
-          <a className="instagram" href={publicConfig.instagramUrl} aria-label="Instagram">
+          <a className="instagram" href={publicConfig.instagramUrl} aria-label="Instagram de Wufú">
             <Camera />
             <span>Instagram</span>
           </a>

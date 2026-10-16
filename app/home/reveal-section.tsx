@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import bondImage from "../../public/images/wufu-bond-v2.png";
+import bondImage from "../../public/images/wufu-bond-v2.webp";
 import type { CampaignSettings } from "../config/campaign";
 import Paw from "../ui/paw-mark";
 import { Arrow } from "./arrow";
@@ -25,7 +25,7 @@ export function RevealSection({
           <Image
             className="brand-photo"
             src={bondImage}
-            alt="Perro junto a un reloj de arena que representa la espera del lanzamiento"
+            alt="Perro artesanal de Wufú sosteniendo un reloj de arena durante la cuenta regresiva"
             fill
             sizes="(max-width: 600px) calc(100vw - 28px), (max-width: 900px) 560px, 42vw"
           />

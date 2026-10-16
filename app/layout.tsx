@@ -4,35 +4,30 @@ import { publicConfig } from "./config/public";
 import ThemeScript from "./ui/theme-script";
 const siteUrl = publicConfig.siteUrl;
 const siteDescription =
-  "Descubre Wufú, la próxima tienda para mascotas en Colombia: productos elegidos con cuidado, experiencias y novedades para compartir más momentos con perros y gatos.";
+  "Conoce Wufú, la próxima tienda de mascotas en Colombia, con productos para perros y gatos elegidos para su bienestar, cuidado y vida diaria.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${publicConfig.brandName} | Próxima tienda para mascotas`,
+    default: `${publicConfig.brandName} | Tienda de mascotas en Colombia`,
     template: `%s | ${publicConfig.brandName}`,
   },
   description: siteDescription,
   applicationName: publicConfig.brandName,
   icons: {
-    icon: [{ url: "/images/favicon.png", type: "image/png" }],
-    shortcut: ["/images/favicon.png"],
-    apple: [{ url: "/images/favicon.png", type: "image/png" }],
+    icon: [{ url: "/images/favicon-32.png", sizes: "32x32", type: "image/png" }],
+    shortcut: ["/images/favicon-32.png"],
+    apple: [{ url: "/images/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   keywords: [
     "Wufú",
     "Wufu",
-    "Wufu mascotas",
-    "Wufu tienda para mascotas",
-    "tienda para mascotas",
+    "tienda de mascotas",
     "tienda de mascotas Colombia",
+    "productos para mascotas",
     "productos para perros",
     "productos para gatos",
-    "mascotas",
-    "bienestar animal",
-    "perros",
-    "gatos",
-    "próxima apertura",
+    "bienestar para perros y gatos",
   ],
   authors: [{ name: publicConfig.brandName }],
   creator: publicConfig.brandName,
@@ -46,12 +41,12 @@ export const metadata: Metadata = {
     locale: "es_CO",
     url: "/",
     siteName: publicConfig.brandName,
-    title: `${publicConfig.brandName} | Próxima tienda para mascotas`,
+    title: `${publicConfig.brandName} | Tienda de mascotas en Colombia`,
     description: siteDescription,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${publicConfig.brandName} | Próxima tienda para mascotas`,
+    title: `${publicConfig.brandName} | Tienda de mascotas en Colombia`,
     description: siteDescription,
   },
   robots: {
@@ -100,7 +95,7 @@ const schema = {
 };
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es-CO" suppressHydrationWarning>
       <head>
         <ThemeScript />
       </head>

@@ -1,12 +1,12 @@
 import Image, { type StaticImageData } from "next/image";
 import type { CSSProperties } from "react";
 
-import christmasOne from "../../public/images/christmas-corner-1.png";
-import christmasTwo from "../../public/images/christmas-corner-2.png";
-import christmasThree from "../../public/images/christmas-corner-3.png";
-import webOne from "../../public/images/halloween-web-1.png";
-import webTwo from "../../public/images/halloween-web-2.png";
-import webThree from "../../public/images/halloween-web-3.png";
+import christmasOne from "../../public/images/christmas-corner-1.webp";
+import christmasTwo from "../../public/images/christmas-corner-2.webp";
+import christmasThree from "../../public/images/christmas-corner-3.webp";
+import webOne from "../../public/images/halloween-web-1.webp";
+import webTwo from "../../public/images/halloween-web-2.webp";
+import webThree from "../../public/images/halloween-web-3.webp";
 
 const webAssets: StaticImageData[] = [webOne, webTwo, webThree, webTwo, webOne, webThree];
 const christmasAssets: StaticImageData[] = [

@@ -6,12 +6,12 @@ export const faqs = [
   {
     question: "¿Qué abrirá primero Wufú?",
     answer:
-      "Nuestra primera etapa será una tienda física pensada para familias con mascotas: un lugar cercano donde podrás descubrir productos seleccionados, recibir orientación y vivir la experiencia Wufú de primera mano.",
+      "Nuestra primera etapa será una tienda de mascotas física en Colombia: un lugar cercano donde podrás descubrir productos para perros y gatos, recibir orientación y vivir la experiencia Wufú de primera mano.",
   },
   {
     question: "¿Qué encontraré en la tienda?",
     answer:
-      "Estamos preparando una selección enfocada en bienestar, cuidado y vida cotidiana. También queremos ofrecer una atención personal que te ayude a elegir mejor según las necesidades de tu perro o gato.",
+      "Estamos preparando productos para el bienestar, cuidado y vida cotidiana de perros y gatos. También ofreceremos atención personal para ayudarte a elegir según las necesidades de tu mascota.",
   },
   {
     question: "¿Cuándo y dónde será la apertura?",
