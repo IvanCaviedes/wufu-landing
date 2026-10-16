@@ -3,15 +3,17 @@
 import { useState, type FormEvent } from "react";
 import { Bone, Cat, Check, Dog, Gift, Mail, ShieldCheck, ToyBrick } from "lucide-react";
 
-import Paw from "../ui/paw-mark";
 import { Arrow } from "./arrow";
 import { totalSecrets } from "./data";
+import type { getLandingContent } from "./landing-content";
 import { TurnstileWidget } from "./turnstile-widget";
 
 export function SignupSection({
+  content,
   foundCount,
   onRegistrationSent,
 }: {
+  content: ReturnType<typeof getLandingContent>["signup"];
   foundCount: number;
   onRegistrationSent: () => void;
 }) {
@@ -70,20 +72,18 @@ export function SignupSection({
     <section className="signup section" id="unete">
       <div className="signup-inner wrap">
         <div className="signup-copy">
-          <Paw light />
-          <div className="kicker light">04 — Únete a la manada</div>
+          <div className="signup-label">
+            <div className="kicker light">{content.kicker}</div>
+          </div>
           <h2>
-            Sé el primero
+            {content.title}
             <br />
-            en saberlo.
+            {content.accent}
           </h2>
-          <p>
-            Conoce antes que nadie la fecha y ubicación de nuestra tienda, y desbloquea una sorpresa
-            especial de apertura.
-          </p>
+          <p>{content.description}</p>
           <div className="trust">
             <ShieldCheck />
-            <span>Tus datos se usan únicamente para novedades del lanzamiento.</span>
+            <span>{content.trust}</span>
           </div>
           <div className="pet-icons">
             <Dog />
@@ -195,7 +195,7 @@ export function SignupSection({
                 className="button button-dark"
                 disabled={submitting || !turnstileToken}
               >
-                {submitting ? "Registrando…" : "¡Quiero saber!"} {!submitting && <Arrow />}
+                {submitting ? "Registrando…" : content.submit} {!submitting && <Arrow />}
               </button>
               <small>
                 Cero spam, palabra de mascota. Puedes retirar tu autorización cuando quieras.

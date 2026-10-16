@@ -3,11 +3,12 @@
 import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react";
 
 import { publicConfig } from "../config/public";
+import type { CampaignSeason } from "../config/campaign";
 import { secretAlertDurationMs } from "./data";
 import { clearProgress, loadProgress, saveProgress } from "./progress-storage";
 import type { PawPrintPosition, SecretId } from "./types";
 
-export function useHomeExperience() {
+export function useHomeExperience(season: CampaignSeason) {
   const [found, setFound] = useState<SecretId[]>([]);
   const [prints, setPrints] = useState<PawPrintPosition[]>([]);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -106,9 +107,24 @@ export function useHomeExperience() {
       return;
 
     const id = Date.now();
+    const seasonalRoll = Math.random();
+    const kind: PawPrintPosition["kind"] =
+      season === "halloween" && seasonalRoll < 0.28
+        ? "pumpkin"
+        : season === "christmas" && seasonalRoll < 0.14
+          ? "gift"
+          : season === "christmas" && seasonalRoll < 0.3
+            ? "snowflake"
+            : "paw";
     setPrints((current) => [
       ...current.slice(-7),
-      { id, x: event.clientX, y: event.clientY, rotation: Math.random() * 40 - 20 },
+      {
+        id,
+        kind,
+        x: event.clientX,
+        y: event.clientY,
+        rotation: Math.random() * 40 - 20,
+      },
     ]);
     window.setTimeout(
       () => setPrints((current) => current.filter((print) => print.id !== id)),

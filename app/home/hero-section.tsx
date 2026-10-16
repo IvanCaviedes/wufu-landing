@@ -1,49 +1,67 @@
 import Image from "next/image";
-import { Sparkles } from "lucide-react";
+import { Gift, Ghost, Snowflake, Sparkles } from "lucide-react";
 
 import heroImage from "../../public/images/wufu-hero-v2.png";
+import type { CampaignSeason } from "../config/campaign";
 import Navbar from "../ui/navbar";
 import Paw from "../ui/paw-mark";
 import { Arrow } from "./arrow";
+import type { getLandingContent } from "./landing-content";
 import type { SecretId } from "./types";
 
 type HeroSectionProps = {
+  content: ReturnType<typeof getLandingContent>["hero"];
   found: SecretId[];
   onDiscover: (secret: SecretId) => void;
   onToggleTheme: () => void;
+  season: CampaignSeason;
 };
 
-export function HeroSection({ found, onDiscover, onToggleTheme }: HeroSectionProps) {
+const seasonalCopy = {
+  halloween: "Una temporada de sustos, premios y colitas felices",
+  christmas: "Celebremos juntos una Navidad llena de huellas",
+} as const;
+
+export function HeroSection({
+  content,
+  found,
+  onDiscover,
+  onToggleTheme,
+  season,
+}: HeroSectionProps) {
+  const marqueeText = Array.from({ length: 4 }, () => content.marquee).join("　");
+
   return (
     <section className="hero" id="inicio">
       <Navbar variant="landing" onToggleTheme={onToggleTheme} />
       <div className="hero-grid wrap">
         <div className="hero-copy">
           <div className="eyebrow">
-            <span className="pulse-dot" /> Algo grande está por llegar
+            <span className="pulse-dot" /> {content.eyebrow}
           </div>
+          {season !== "none" && (
+            <div className={`seasonal-note ${season}`}>
+              {season === "halloween" ? <Ghost /> : <Snowflake />}
+              <span>{seasonalCopy[season]}</span>
+            </div>
+          )}
           <h1>
-            La vida juntos
+            {content.title}
             <br />
-            está a punto de
-            <br />
-            <em>cambiar.</em>
+            <em>{content.accent}</em>
           </h1>
-          <p>
-            Muy pronto descubrirás una nueva forma de cuidar, consentir y compartir más momentos con
-            quien siempre está a tu lado.
-          </p>
+          <p>{content.description}</p>
           <div className="hero-actions">
             <a href="#unete" className="button button-aqua">
-              Ser parte de la manada <Arrow />
+              {content.primary} <Arrow />
             </a>
             <a href="#proposito" className="text-link">
-              Conoce lo que nos mueve <Arrow down />
+              {content.secondary} <Arrow down />
             </a>
           </div>
           <div className="discovery-whisper">
             <Sparkles />
-            <span>Los mejores detalles no siempre están a simple vista.</span>
+            <span>{content.whisper}</span>
           </div>
         </div>
         <div className="hero-visual" aria-label="Familia compartiendo con sus mascotas">
@@ -70,9 +88,7 @@ export function HeroSection({ found, onDiscover, onToggleTheme }: HeroSectionPro
             className={`sticker one ${found.includes("logo") ? "secret-hotspot-found" : ""}`}
             onDoubleClick={found.includes("logo") ? undefined : () => onDiscover("logo")}
           >
-            Muy
-            <br />
-            pronto
+            {content.sticker}
           </div>
           <button
             type="button"
@@ -85,12 +101,24 @@ export function HeroSection({ found, onDiscover, onToggleTheme }: HeroSectionPro
           </button>
           <i className="spark a">✦</i>
           <i className="spark b">✦</i>
+          {season === "halloween" && (
+            <div className="seasonal-ornament seasonal-halloween" aria-hidden="true">
+              <Ghost />
+              <span>BOO!</span>
+            </div>
+          )}
+          {season === "christmas" && (
+            <div className="seasonal-ornament seasonal-christmas" aria-hidden="true">
+              <Snowflake />
+              <Gift />
+            </div>
+          )}
         </div>
       </div>
       <div className="marquee">
-        <div>
-          MÁS VIDAS JUNTAS　✦　MÁS MOMENTOS　✦　MÁS HISTORIAS　✦　MÁS VIDAS JUNTAS　✦　MÁS
-          MOMENTOS　✦
+        <div className="marquee-track">
+          <span>{marqueeText}</span>
+          <span aria-hidden="true">{marqueeText}</span>
         </div>
       </div>
     </section>

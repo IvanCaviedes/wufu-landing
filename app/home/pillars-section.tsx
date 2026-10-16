@@ -1,19 +1,20 @@
 import { pillars } from "./data";
+import type { getLandingContent } from "./landing-content";
 
-export function PillarsSection() {
+export function PillarsSection({
+  content,
+}: {
+  content: ReturnType<typeof getLandingContent>["intro"];
+}) {
   return (
     <section className="intro section wrap" id="proposito">
-      <div className="kicker">01 — Lo que nos mueve</div>
+      <div className="kicker">{content.kicker}</div>
       <div className="intro-grid">
         <h2>
-          Una vida mejor
-          <br />
-          se construye <em>juntos.</em>
+          {content.title}
+          <br /> <em>{content.accent}</em>
         </h2>
-        <p>
-          Creamos pensando en el vínculo que compartes con tu mascota: más cercanía, menos
-          complicaciones, más confianza y bienestar en cada momento.
-        </p>
+        <p>{content.description}</p>
       </div>
       <div className="pillar-grid">
         {pillars.map(({ description, icon: Icon, title }, index) => (

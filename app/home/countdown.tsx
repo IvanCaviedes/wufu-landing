@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import { publicConfig } from "../config/public";
-
 const labels = {
   days: "días",
   hours: "horas",
@@ -27,11 +25,13 @@ function getTimeLeft(target: number): TimeLeft {
 export function Countdown({
   onSecret,
   secretDisabled,
+  targetAt,
 }: {
   onSecret: () => void;
   secretDisabled: boolean;
+  targetAt: string;
 }) {
-  const configuredTarget = Date.parse(publicConfig.launchAt);
+  const configuredTarget = Date.parse(targetAt);
   const target = Number.isFinite(configuredTarget) ? configuredTarget : 0;
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,

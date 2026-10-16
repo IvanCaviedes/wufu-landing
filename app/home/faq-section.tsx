@@ -2,34 +2,50 @@
 
 import { useState } from "react";
 
+import type { CampaignSettings } from "../config/campaign";
 import Paw from "../ui/paw-mark";
 import { faqs } from "./data";
+import type { getLandingContent } from "./landing-content";
 
-export function FaqSection() {
+export function FaqSection({
+  campaign,
+  content,
+}: {
+  campaign: CampaignSettings;
+  content: ReturnType<typeof getLandingContent>["faq"];
+}) {
   const [openIndex, setOpenIndex] = useState(0);
+  const phaseFaqs =
+    campaign.phase === "open"
+      ? [
+          { question: "¿Dónde está Wufú?", answer: `Nos encuentras en ${campaign.location}.` },
+          { question: "¿Cuál es el horario?", answer: campaign.openingHours },
+          ...faqs.filter(({ question }) => !question.includes("Cuándo y dónde")),
+        ]
+      : faqs;
 
   return (
     <section className="faq section wrap" id="preguntas">
       <div className="faq-heading">
         <div>
-          <div className="kicker">03 — Antes de abrir las puertas</div>
+          <div className="kicker">{content.kicker}</div>
           <h2>
-            Lo que ya podemos
+            {content.title}
             <br />
-            <em>contarte.</em>
+            <em>{content.accent}</em>
           </h2>
         </div>
         <div className="faq-badge">
           <Paw light />
           <span>
-            Abrimos
-            <br />
-            muy pronto
+            {content.badge.split("\n").map((line) => (
+              <span key={line}>{line}</span>
+            ))}
           </span>
         </div>
       </div>
       <div className="faq-list">
-        {faqs.map(({ answer, question }, index) => {
+        {phaseFaqs.map(({ answer, question }, index) => {
           const isOpen = openIndex === index;
 
           return (

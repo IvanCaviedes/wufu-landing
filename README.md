@@ -24,6 +24,22 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 3. Completa opcionalmente `RESEND_API_KEY` y `RESEND_AUDIENCE_ID` para sincronizar los
    registros con la lista de correo.
 
+## Fases de la landing
+
+La portada cambia automáticamente todo su contenido según las fechas configuradas:
+
+- `prelaunch`: antes de `PRELAUNCH_END_AT`.
+- `launch`: desde `PRELAUNCH_END_AT` hasta `LAUNCH_AT`.
+- `open`: desde `LAUNCH_AT`.
+
+Configura también `OPENING_LOCATION` y `OPENING_HOURS`. Para revisar o activar una fase manualmente,
+usa `LANDING_PHASE=prelaunch`, `LANDING_PHASE=launch` o `LANDING_PHASE=open`; déjalo vacío para usar
+las fechas.
+
+Halloween y Navidad también se activan automáticamente usando `HALLOWEEN_START_AT`,
+`HALLOWEEN_END_AT`, `CHRISTMAS_START_AT` y `CHRISTMAS_END_AT`. `SEASON_OVERRIDE` permite forzar
+`halloween`, `christmas` o `none` para pruebas; déjalo vacío para usar el calendario.
+
 La clave `SUPABASE_SERVICE_ROLE_KEY` nunca debe usar el prefijo `NEXT_PUBLIC_` ni enviarse al
 navegador. La tabla tiene Row Level Security activado y las escrituras se realizan únicamente desde
 `/api/subscribe`.

@@ -8,6 +8,7 @@ import {
   Gift,
   Lightbulb,
   PawPrint,
+  Snowflake,
   Sparkles,
   Store,
   X,
@@ -38,6 +39,31 @@ function AlertCountdown() {
   }, []);
 
   return <small className="alert-countdown">Se cierra en {secondsLeft} s</small>;
+}
+
+function PumpkinMark({ className }: { className: string }) {
+  return (
+    <svg className={className} viewBox="0 0 32 32" aria-hidden="true">
+      <path className="pumpkin-stem" d="M16 8c-1.8-3.6.3-5.4 3.2-5.8-.5 2.4-1.4 4-3.2 5.8Z" />
+      <path
+        className="pumpkin-body"
+        d="M16 7.5c7.6 0 12 4.5 12 10.5S23.6 28.5 16 28.5 4 24 4 18 8.4 7.5 16 7.5Z"
+      />
+      <path
+        d="M16 8c-2.5 2.7-3.2 14.6 0 20M16 8c2.5 2.7 3.2 14.6 0 20M8.5 11.5c-2 4-1.8 9.3.2 13"
+        fill="none"
+        stroke="#8f3515"
+        strokeOpacity=".28"
+      />
+      <path
+        d="m10 16 3-2 1.5 3H9.8ZM22 16l-3-2-1.5 3h4.7ZM11.5 21c2.8 2 6.2 2 9 0"
+        fill="none"
+        stroke="#3c1c13"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 }
 
 export function SecretOverlays({
@@ -71,12 +97,22 @@ export function SecretOverlays({
   return (
     <>
       {prints.map((print) => (
-        <PawPrint
-          className="click-print"
+        <span
+          className={`click-print ${print.kind === "pumpkin" ? "pumpkin-print" : ""} ${print.kind === "gift" || print.kind === "snowflake" ? "christmas-print" : ""}`}
           key={print.id}
           style={{ left: print.x, top: print.y, transform: `rotate(${print.rotation}deg)` }}
           aria-hidden="true"
-        />
+        >
+          {print.kind === "pumpkin" ? (
+            <PumpkinMark className="pumpkin-mark" />
+          ) : print.kind === "gift" ? (
+            <Gift />
+          ) : print.kind === "snowflake" ? (
+            <Snowflake />
+          ) : (
+            <PawPrint />
+          )}
+        </span>
       ))}
       {secret && (
         <aside

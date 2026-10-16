@@ -116,6 +116,214 @@ select {
   box-shadow: 0 0 0 6px #14bba624;
   animation: pulse 1.8s infinite;
 }
+.seasonal-note {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 18px;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--season-accent) 38%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--season-accent) 10%, transparent);
+  color: var(--ink);
+  font-size: 0.74rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.seasonal-note svg {
+  width: 17px;
+  height: 17px;
+  color: var(--season-accent);
+  flex: 0 0 auto;
+}
+[data-season="halloween"] {
+  --season-accent: #db6b2d;
+}
+[data-season="christmas"] {
+  --season-accent: #b63838;
+}
+[data-season] {
+  position: relative;
+}
+[data-season="halloween"] .hero {
+  background: radial-gradient(circle at 8% 18%, #db6b2d12, transparent 26%), var(--sand);
+}
+.halloween-background {
+  position: absolute;
+  z-index: 80;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+.landing-cobweb {
+  position: absolute;
+  width: clamp(210px, 23vw, 340px);
+  height: auto;
+  opacity: 0.42;
+  filter: grayscale(1) contrast(0.8);
+  transform-origin: top left;
+}
+.web-1 {
+  top: 1%;
+  right: -48px;
+  transform: scaleX(-1);
+  transform-origin: center;
+}
+.web-2 {
+  top: 18%;
+  left: -48px;
+}
+.web-3 {
+  top: 36%;
+  right: -48px;
+  transform: scale(-1, -1);
+  transform-origin: center;
+}
+.web-4 {
+  top: 54%;
+  left: -48px;
+  transform: scaleY(-1);
+  transform-origin: center;
+}
+.web-5 {
+  top: 72%;
+  right: -48px;
+  transform: scaleX(-1);
+  transform-origin: center;
+}
+.web-6 {
+  top: 88%;
+  left: -48px;
+  transform: scaleY(-1);
+  transform-origin: center;
+}
+[data-theme="dark"] .halloween-background {
+  mix-blend-mode: screen;
+}
+[data-theme="dark"] .landing-cobweb {
+  opacity: 0.34;
+  filter: grayscale(1) brightness(1.55) contrast(0.75);
+}
+.halloween-treats {
+  position: fixed;
+  z-index: 82;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+.halloween-treats span {
+  position: absolute;
+  top: var(--treat-top);
+  left: var(--treat-left);
+  font-size: var(--treat-size);
+  line-height: 1;
+  opacity: 0;
+  filter: drop-shadow(0 4px 7px #3c1c1340);
+  animation: treat-appear var(--treat-duration) ease-in-out var(--treat-delay) infinite;
+}
+@keyframes treat-appear {
+  0%,
+  46%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) rotate(-14deg) scale(0.65);
+  }
+  56% {
+    opacity: 0.84;
+    transform: translate3d(8px, 0, 0) rotate(7deg) scale(1.08);
+  }
+  78% {
+    opacity: 0.78;
+    transform: translate3d(var(--treat-sway), -34px, 0) rotate(24deg) scale(1);
+  }
+  95% {
+    opacity: 0;
+    transform: translate3d(var(--treat-sway), -58px, 0) rotate(38deg) scale(0.78);
+  }
+}
+.christmas-background {
+  position: absolute;
+  z-index: 70;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+.christmas-corner {
+  position: absolute;
+  width: clamp(240px, 27vw, 410px);
+  height: auto;
+  opacity: 0.72;
+  filter: saturate(0.88) contrast(0.94) drop-shadow(0 10px 24px #082f3524);
+}
+.christmas-corner-1 {
+  top: -38px;
+  left: -54px;
+}
+.christmas-corner-2 {
+  top: 24%;
+  right: -70px;
+  transform: scaleX(-1);
+}
+.christmas-corner-3 {
+  top: 46%;
+  left: -74px;
+}
+.christmas-corner-4 {
+  top: 68%;
+  right: -64px;
+  transform: scaleX(-1) rotate(-4deg);
+}
+.christmas-corner-5 {
+  bottom: -60px;
+  left: -58px;
+  transform: scaleY(-1);
+}
+[data-theme="dark"] .christmas-corner {
+  opacity: 0.62;
+  filter: brightness(0.9) saturate(0.82) drop-shadow(0 12px 30px #0006);
+}
+.christmas-snow {
+  position: fixed;
+  z-index: 80;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+.christmas-snow span {
+  position: absolute;
+  top: -8vh;
+  left: var(--snow-left);
+  color: #ffffff;
+  font-size: var(--snow-size);
+  line-height: 1;
+  opacity: 0;
+  filter: drop-shadow(0 1px 2px #0e5d6640);
+  animation: snow-fall var(--snow-duration) linear var(--snow-delay) infinite;
+}
+@keyframes snow-fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -8vh, 0) rotate(0deg);
+  }
+  12% {
+    opacity: 0.7;
+  }
+  88% {
+    opacity: 0.62;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--snow-sway), 116vh, 0) rotate(300deg);
+  }
+}
+[data-season="christmas"] .hero {
+  background: radial-gradient(circle at 8% 18%, #b6383810, transparent 26%), var(--sand);
+}
 @keyframes pulse {
   50% {
     box-shadow: 0 0 0 12px #14bba600;
@@ -292,31 +500,93 @@ h2 em {
   top: 120px;
   animation-delay: -1.5s;
 }
+.seasonal-ornament {
+  position: absolute;
+  z-index: 3;
+  right: 18px;
+  bottom: 24px;
+  width: 92px;
+  height: 92px;
+  border: 1px solid #ffffff8c;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: white;
+  filter: drop-shadow(0 12px 22px #082f3540);
+  transform: rotate(8deg);
+  animation: seasonal-float 4s ease-in-out infinite;
+}
+.seasonal-ornament svg {
+  width: 38px;
+  height: 38px;
+}
+.seasonal-halloween {
+  background: #db6b2de8;
+}
+.seasonal-halloween span {
+  position: absolute;
+  bottom: 10px;
+  font-size: 0.55rem;
+  font-weight: 950;
+  letter-spacing: 0.14em;
+}
+.seasonal-christmas {
+  background: #b63838e8;
+}
+.seasonal-christmas svg:first-child {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  opacity: 0.22;
+}
+.seasonal-christmas svg:last-child {
+  width: 34px;
+  height: 34px;
+}
+@keyframes seasonal-float {
+  50% {
+    transform: translateY(-8px) rotate(3deg);
+  }
+}
 @keyframes float {
   50% {
     transform: translateY(-12px) rotate(15deg);
   }
 }
 .marquee {
-  position: absolute;
-  bottom: 0;
+  position: relative;
+  z-index: 2;
   width: 100%;
   background: var(--ocean);
   color: white;
   overflow: hidden;
-  height: 40px;
+  height: 52px;
+  padding-top: 8px;
   display: flex;
   align-items: center;
-  transform: rotate(-1deg) scale(1.02);
+  clip-path: polygon(0 9px, 100% 0, 100% 100%, 0 100%);
 }
-.marquee div {
+.marquee-track {
+  display: flex;
+  width: max-content;
+  min-width: max-content;
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+.marquee-track span {
+  flex: 0 0 auto;
+  min-width: 100vw;
+  padding-right: 2.5rem;
   white-space: nowrap;
   font-size: 0.78rem;
+  line-height: 1.4;
   letter-spacing: 0.18em;
   font-weight: 900;
-  animation: marquee 20s linear infinite;
 }
 @keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
   to {
     transform: translateX(-50%);
   }
@@ -457,8 +727,26 @@ h2 {
   background: var(--ocean);
   color: white;
   overflow: hidden;
+  position: relative;
+}
+.reveal:before {
+  content: "wufú";
+  position: absolute;
+  right: -3vw;
+  top: 50%;
+  color: #ffffff0a;
+  font-family: "Arial Rounded MT Bold", "Trebuchet MS", Arial, sans-serif;
+  font-size: 24vw;
+  font-weight: 950;
+  letter-spacing: -0.1em;
+  line-height: 0.8;
+  pointer-events: none;
+  transform: translateY(-50%) rotate(-5deg);
+  user-select: none;
 }
 .reveal-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 9vw;
@@ -549,23 +837,31 @@ h2 {
   background: var(--aqua);
   border-radius: 50%;
   color: white;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   text-align: center;
   flex-shrink: 0;
   transform: rotate(8deg);
   box-shadow: 8px 10px 0 var(--breeze);
 }
 .faq-badge .paw {
-  transform: scale(0.55);
-  margin-bottom: -35px;
+  flex: 0 0 44px;
+  transform: scale(0.58);
 }
-.faq-badge span {
+.faq-badge > span {
+  display: block;
+  max-width: 120px;
   text-transform: uppercase;
   font-weight: 900;
   line-height: 1.05;
   font-size: 0.72rem;
   letter-spacing: 0.08em;
+}
+.faq-badge > span > span {
+  display: block;
 }
 .faq-list {
   margin-top: 72px;
@@ -660,8 +956,19 @@ h2 {
   line-height: 1.6;
   max-width: 480px;
 }
-.signup-copy > .paw {
-  margin-bottom: 35px;
+.signup-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.signup-label .paw {
+  flex: 0 0 48px;
+  transform: scale(0.72);
+}
+.signup-label .kicker {
+  margin: 0;
+  color: white;
 }
 .signup-card {
   background: var(--cream);
@@ -993,6 +1300,10 @@ footer {
   .hero-copy > p {
     font-size: 1rem;
   }
+  .seasonal-note {
+    max-width: 100%;
+    font-size: 0.68rem;
+  }
   .hero-actions {
     align-items: flex-start;
     flex-direction: column;
@@ -1019,6 +1330,12 @@ footer {
   }
   .sticker.two {
     left: -3px;
+  }
+  .seasonal-ornament {
+    right: 8px;
+    bottom: 18px;
+    width: 76px;
+    height: 76px;
   }
   .intro-grid {
     gap: 0;
@@ -1384,6 +1701,32 @@ h2 {
 }
 
 /* Countdown cards */
+.campaign-status-label {
+  margin: 28px 0 -24px !important;
+  color: var(--mint) !important;
+  font-size: 0.72rem !important;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.visit-details {
+  display: grid;
+  gap: 8px;
+  margin: 28px 0 36px;
+  padding: 24px;
+  border: 1px solid #ffffff2e;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #ffffff16, #ffffff08);
+  box-shadow: inset 0 1px 0 #ffffff1f;
+}
+.visit-details strong {
+  color: var(--cream);
+  font-size: clamp(1.15rem, 2vw, 1.6rem);
+}
+.visit-details span {
+  color: var(--mint);
+  font-weight: 700;
+}
 .countdown {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1499,6 +1842,82 @@ h2 {
   color: var(--aqua);
   animation: paw-pop 0.95s ease-out forwards;
   filter: drop-shadow(0 3px 5px #0003);
+}
+.click-print > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pumpkin-print {
+  width: 34px;
+  height: 34px;
+  color: #df6c25;
+  filter: drop-shadow(0 4px 7px #7d321b52);
+  animation-name: pumpkin-pop;
+}
+.pumpkin-mark .pumpkin-body {
+  fill: #f47a22;
+}
+.pumpkin-mark .pumpkin-stem {
+  fill: #4f7a3c;
+}
+.christmas-print {
+  width: 32px;
+  height: 32px;
+  color: #c83f45;
+  filter: drop-shadow(0 4px 7px #0e5d6640);
+  animation-name: christmas-pop;
+}
+.christmas-print .lucide-snowflake {
+  color: #bcefeb;
+  stroke-width: 2.2;
+}
+@keyframes christmas-pop {
+  0% {
+    opacity: 0;
+    scale: 0.2;
+    rotate: -18deg;
+  }
+  24% {
+    opacity: 0.95;
+    scale: 1.15;
+  }
+  70% {
+    opacity: 0.85;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 0.68;
+    translate: var(--snow-sway, 8px) -52px;
+    rotate: 24deg;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .halloween-treats,
+  .christmas-snow {
+    display: none;
+  }
+}
+@keyframes pumpkin-pop {
+  0% {
+    opacity: 0;
+    scale: 0.2;
+    translate: 0 8px;
+  }
+  22% {
+    opacity: 0.95;
+    scale: 1.12;
+  }
+  72% {
+    opacity: 0.82;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 0.72;
+    translate: 0 -48px;
+  }
 }
 @keyframes paw-pop {
   0% {

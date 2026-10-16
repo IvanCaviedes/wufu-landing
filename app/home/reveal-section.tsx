@@ -1,14 +1,20 @@
 import Image from "next/image";
 
 import bondImage from "../../public/images/wufu-bond-v2.png";
+import type { CampaignSettings } from "../config/campaign";
 import Paw from "../ui/paw-mark";
 import { Arrow } from "./arrow";
 import { Countdown } from "./countdown";
+import type { getLandingContent } from "./landing-content";
 
 export function RevealSection({
+  campaign,
+  content,
   clockDiscovered,
   onDiscover,
 }: {
+  campaign: CampaignSettings;
+  content: ReturnType<typeof getLandingContent>["reveal"];
   clockDiscovered: boolean;
   onDiscover: () => void;
 }) {
@@ -28,25 +34,27 @@ export function RevealSection({
           </div>
         </div>
         <div className="reveal-copy">
-          <div className="kicker light">02 — La espera vale la pena</div>
+          <div className="kicker">{content.kicker}</div>
           <h2>
-            Lo bueno se
-            <br />
-            disfruta.
-            <br />
-            <em>
-              Lo increíble
-              <br />
-              se espera.
-            </em>
+            {content.title}
+            <br /> <em>{content.accent}</em>
           </h2>
-          <p>
-            Estamos afinando cada detalle para sorprenderte. Mientras tanto, este reloj guarda el
-            secreto.
-          </p>
-          <Countdown secretDisabled={clockDiscovered} onSecret={onDiscover} />
+          <p>{content.description}</p>
+          <p className="campaign-status-label">{content.countdownLabel}</p>
+          {campaign.phase === "open" ? (
+            <div className="visit-details" aria-label="Información de la tienda">
+              <strong>{campaign.location}</strong>
+              <span>{campaign.openingHours}</span>
+            </div>
+          ) : (
+            <Countdown
+              targetAt={campaign.phaseEndsAt}
+              secretDisabled={clockDiscovered}
+              onSecret={onDiscover}
+            />
+          )}
           <a href="#unete" className="button button-cream">
-            Avísenme primero <Arrow />
+            {content.cta} <Arrow />
           </a>
         </div>
       </div>
