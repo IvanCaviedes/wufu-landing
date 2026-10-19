@@ -21,6 +21,7 @@ export function SignupSection({
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileRequested, setTurnstileRequested] = useState(false);
   const [challengeKey, setChallengeKey] = useState(0);
   const hasReward = foundCount === totalSecrets;
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
@@ -94,7 +95,12 @@ export function SignupSection({
         </div>
         <div className="signup-card">
           {!sent ? (
-            <form onSubmit={submit} autoComplete="on">
+            <form
+              onSubmit={submit}
+              onFocusCapture={() => setTurnstileRequested(true)}
+              onPointerEnter={() => setTurnstileRequested(true)}
+              autoComplete="on"
+            >
               <input
                 type="hidden"
                 name="secretos_encontrados"
@@ -174,17 +180,17 @@ export function SignupSection({
                   .
                 </span>
               </label>
-              {turnstileSiteKey ? (
+              {turnstileSiteKey && turnstileRequested ? (
                 <TurnstileWidget
                   key={challengeKey}
                   siteKey={turnstileSiteKey}
                   onToken={setTurnstileToken}
                 />
-              ) : (
+              ) : !turnstileSiteKey ? (
                 <p className="form-error" role="alert">
                   La verificación de seguridad no está configurada.
                 </p>
-              )}
+              ) : null}
               {submitError && (
                 <p className="form-error" role="alert">
                   {submitError}
